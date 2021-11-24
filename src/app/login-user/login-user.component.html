@@ -1,0 +1,141 @@
+<section class="form my-4 mx-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 no-gutters">
+                <img src="assets/store.jpg" alt="" class="img-fluid">
+            </div>
+            <div class="col-lg-7 px-5 pt-4">
+                <h1 class="font-weight-bold py-3">{{text1}}</h1>
+                <h4 class="mb-4">{{text2}}</h4>
+                <form [formGroup]="myForm" (ngSubmit)="login(myForm)">
+                    <div class="form-row">
+                        <div class="col-lg-7">
+                            <input type="email" placeholder="Email" class="form-control my-3 p-3"
+                                formControlName="email">
+                        </div>
+                    </div>
+
+                    <div class="alert alert-secondary"
+                        *ngIf="myForm.controls['email'].invalid && myForm.controls['email'].touched">
+
+
+                        <div *ngIf="myForm.controls['email'].hasError('required')">this is a required field</div>
+                        <div *ngIf="myForm.controls['email'].hasError('pattern')">Wrong format </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-lg-7">
+                            <input type="password" placeholder="********" class="form-control my-3 p-3"
+                                formControlName="password">
+                        </div>
+                    </div>
+
+                    <div class="alert alert-secondary"
+                        *ngIf="myForm.controls['password'].invalid && myForm.controls['password'].touched">
+                        <div *ngIf="myForm.controls['password'].hasError('required')">this is a required field</div>
+                        <div *ngIf="myForm.controls['password'].hasError('minlength')">this minlength is equal to 8</div>
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="col-lg-7">
+                            <!-- <button type="submit" class="btn1 mt-2 mb-4">Login</button> -->
+                            <input type="submit" class="btn1 mt-3 mb-4" value="Login" (click)="login(myForm)" [disabled]="myForm.invalid">
+                        </div>
+                    </div>
+                    <a href="#">Forgot Password</a>
+                    <p>Don't have an account? <a href="#" routerLink="/subscribe" (click)="show()">Register here</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+<!-- <h1 class="text-align-center">LogIn</h1>
+<div class="alert alert-danger" *ngIf="msg!=null"></div>
+<form class="w-50 mx-auto" [formGroup]="myForm" (ngSubmit)="checkUser(myForm)">
+    <div class="form-group col-md-4">
+        <div>
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" formControlName="email">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+
+            <br>
+            <div class=" alert alert-danger "
+                *ngIf="myForm.controls['email'].invalid && myForm.controls['email'].touched">
+
+
+                <div *ngIf="myForm.controls['email'].hasError('required')">this is a required field</div>
+                <div *ngIf="myForm.controls['email'].hasError('minlength')">this minlength is equal to 3 </div>
+
+            </div>
+        </div>
+        <div>
+            <label>Password</label>
+            <input type="password" name="password" class="form-control" formControlName="password">
+            <br>
+            <div class=" alert alert-danger"
+                *ngIf="myForm.controls['password'].invalid && myForm.controls['password'].touched">
+                <div *ngIf="myForm.controls['password'].hasError('required')">this is a required field</div>
+                <div *ngIf="myForm.controls['password'].hasError('minlength')">this minlength is equal to 3 </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="mr-5">
+
+        <button class="btn btn-outline-success" [disabled]="myForm.invalid" type="submit">Login
+            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+        </button>
+        <button class="btn btn-outline-warning" (click)="reset()">Reset</button>
+    </div>
+</form> -->
+
+
+
+<!-- 
+<h1>LogIn</h1>
+<form [formGroup]="myForm"> -->
+<!-- importation -->
+<!-- <div class="form-group">
+        <label for="">Email</label>
+        <input type="text" class="form-control" formControlName="email" placeholder="Email">
+        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+
+    <div class="alert alert-danger" role="alert" *ngIf="myForm.get('email').invalid"> -->
+<!-- <div class="alert alert-danger" role="alert" *ngIf="myemail.invalid"> -->
+<!-- format ^[a-zA-Z0-9._-]+@gmail.com
+    </div>
+
+    <div class="form-group">
+        <label for="">Passwrod</label>
+        <input type="text" class="form-control" formControlName="pwd" placeholder="Passwrod">
+    </div>
+
+    <div>
+        <div class="alert alert-danger" role="alert" *ngIf="myForm.get('pwd').invalid"> -->
+<!-- <div class="alert alert-danger" role="alert" *ngIf="myemail.invalid"> -->
+<!-- Minimum 8 chiffres
+        </div>
+    </div>
+    <br> -->
+<!-- <input type="submit" class="btn btn-primary" [routerLink]="['/mainuser/listuser/Customer']"> -->
+
+<!-- <button class="btn btn-outline-success"[disabled]="myForm.invalid" (click)="login()">Login 
+        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span></button>
+
+    <button class="btn btn-outline-warning" >Reset</button>
+</form> -->
+
+<!-- <input type="text" [formControl]="name"> -->
+<!-- propriete binding si un seul input -->

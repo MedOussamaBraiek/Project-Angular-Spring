@@ -1,0 +1,29 @@
+<form [formGroup]="FormAddInvoice" (submit)="add()">
+    <br>
+    <div class="form-group col-md-4 mb-3">
+        <label for="id" class="form-label">idProduit</label>
+        <input type="text" formControlName="idInvoice" class="form-control" name="id">
+    </div>
+
+    <div class="form-group col-md-4 mb-3">
+        <label for="discount" class="form-label">discountAmount:</label>
+        <input type="text" formControlName="discountAmount" class="form-control" name="discount">
+    </div>
+
+    <div class="form-group col-md-4 mb-3">
+        <label for="bill" class="form-label">billAmount:</label>
+        <input type="text" formControlName="billAmount" class="form-control" name="bill">
+    </div>
+
+    <div class="form-group col-md-4 mb-3">
+        <label for="date" class="form-label">dateBill:</label>
+        <input type="text" formControlName="dateBill" class="form-control" name="date">
+    </div>
+
+    <div class="form-group col-md-4 mb-3">
+        <label for="status" class="form-label">Status:</label>
+        <input type="text" formControlName="Status"  class="form-control" name="status">
+    </div>
+    <input type="submit" value="Ajouter" class="btn btn-primary">
+    <!-- <button class="btn btn-primary" (click)="add()">Save</button> -->
+</form>

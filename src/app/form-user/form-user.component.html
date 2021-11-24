@@ -1,0 +1,144 @@
+<h1>Create a new Account</h1>
+<form class ="w-50 mx-auto"  #f="ngForm" >
+    <div class="form-group ">
+        <label>First Name</label>
+        <input type="text" name="firstname" class="form-control"[(ngModel)]="user.firstName" required minlength="3" pattern="[a-zA-Z]+$" #fn="ngModel" >
+        <br>
+        <div class="alert alert-danger" *ngIf ="fn.invalid && fn.touched">
+            <div *ngIf="fn.hasError('required')">FirstName is a required field</div>
+            <div *ngIf="fn.hasError('minlength')">FirstName  minlength ies equal to 3</div>
+            <div *ngIf="fn.hasError('pattern')"> error msg Pattern</div>
+        </div>
+        <label>Last Name</label>
+        <input type="text" name="lastname" class="form-control"[(ngModel)]="user.lastName" required pattern="[a-zA-Z]+$" #ln="ngModel" >
+        <br>
+        <div class="alert alert-danger" *ngIf ="ln.invalid && ln.touched">
+            <div *ngIf="ln.hasError('required')">LastName is a required field</div>
+            <div *ngIf="ln.hasError('minlength')">LastName minlength ies equal to 3</div>
+            <div *ngIf="ln.hasError('pattern')"> error msg Pattern</div>
+        </div>
+        <div>
+            <label>Email</label>
+        <input type="email" name="email" class="form-control"[(ngModel)]="user.email" required minlength="3" pattern="^[a-zA-Z0-9._-]+@gmail.com" #e="ngModel" >
+        <br>
+        <div class="alert alert-danger" *ngIf ="e.invalid && e.touched">
+            <div *ngIf="e.hasError('required')">Email minlength ies equal to 3</div>
+            <div *ngIf="e.hasError('pattern')"> error msg Pattern</div>
+        </div>
+        </div>
+        <div>
+            <label>Password</label>
+        <input type="password" name="password" class="form-control"[(ngModel)]="user.password" required minlength="8" pattern="^[a-zA-Z0-9]{8,}?" #p="ngModel" >
+        <br>
+        <div class="alert alert-danger" *ngIf ="p.invalid && p.touched">
+            <div *ngIf="p.hasError('required')">Password is a required field</div>
+            <div *ngIf="p.hasError('minlength')">Password minlength ies equal to 3</div>
+            <div *ngIf="p.hasError('pattern')"> error msg Pattern</div>
+        </div>
+        </div>
+        
+      <div>
+        <label>Picture</label>
+    <input type="text" name="Picture" class="form-control"[(ngModel)]="user.picture"  >
+    <br>
+    </div>
+    <div>
+        <label>BirthDay</label>
+        <input type="datepicker" class="form-control" name="birthDate" placeholder="Birth date"
+        onfocus="(this.type='date')" onblur="(this.type='text')" [(ngModel)]="user.birthDate"
+        required="required">
+    <br>
+    </div>
+    <div>
+        <label>Job</label>
+    <input type="text" name="profession" class="form-control"[(ngModel)]="user.profession"  >
+    <br>
+    </div>
+
+    </div>
+    <button class="btn btn-outline-success" (click)="postUser(f)"[disabled]="f.invalid">Save</button>
+    &nbsp;
+    <button class="btn btn-outline-warning" (click)="f.reset()" >Reset</button> <a class="mx-3" style="color: black" routerLink="/login">Already have an account?</a>
+
+</form>
+
+
+
+
+<!-- 
+<form [formGroup]="myForm">
+
+    
+
+    <div class="form-group col-md-4 mb-3">
+        <label for="first" class="form-label">First Name</label>
+        <input type="text" class="form-control" name="first" required minlength="3" placeholder="First Name" formControlName="firstName">
+    </div>
+   <div class="alert alert-danger" *ngIf="myForm.get('firstName').invalid">
+        <div *ngIf="myForm.get('firstName').errors.required">
+            First Name Obligatoire
+        </div> 
+        <div *ngIf="myForm.get('firstName').errors.pattern">
+            Pattern incorrect
+        </div>
+   </div>
+
+
+    <div class="form-group col-md-4 mb-3">
+        <label for="last" class="form-label" ngModel>Last Name</label>
+        <input type="text" class="form-control" name="last" required minlength="3" placeholder="Last Name" formControlName="lastName">
+    </div>
+    <div class="alert alert-danger" *ngIf="myForm.get('lastName').invalid">
+        <div  *ngIf="myForm.get('lastName').errors.required">
+            Last Name Obligatoire
+        </div> 
+        <div  *ngIf="myForm.get('lastName').errors.pattern">
+            Pattern incorrect
+        </div>
+    </div>
+
+
+    <div class="form-group col-md-4 mb-3">
+        <label for="birth" class="form-label" ngModel>BirthDate</label>
+        <input type="date" class="form-control" name="birth" required minlength="3" formControlName="birthday">
+    </div>
+
+    
+    <div class="form-group col-md-4 mb-3">
+        <label for="email" class="form-label" ngModel>Email</label>
+        <input type="text" class="form-control" name="email" required placeholder="email@gmail.com" formControlName="email">
+    </div>
+
+    <div class="alert alert-danger" *ngIf="myForm.get('email').errors?.pattern">
+        Pattern incorrect
+    </div>
+   
+
+
+    <div class="form-group col-md-4 mb-3">
+        <label for="pwd" class="form-label" ngModel>Passwrod</label>
+        <input type="text" class="form-control" name="pwd" required placeholder="Passwrod"  formControlName="password">
+    </div>
+
+    <div class="alert alert-danger" *ngIf="myForm.get('password').errors?.pattern">
+        Pattern incorrect
+    </div>
+   
+
+
+    <div class="form-group col-md-4 mb-3">
+        <label for="profession" class="form-label" ngModel>Profession</label>
+        <input type="text" class="form-control" name="profession" required placeholder="Profession" formControlName="profession">
+    </div>
+
+    <div class="form-group col-md-4 mb-3">
+        <label for="cust" class="form-label" ngModel>Custormer Category</label>
+        <input type="text" class="form-control" name="cust" required value="Customer" [disabled]="true" placeholder="Customer"  formControlName="category">
+    </div>
+
+    <br>
+    <button class="btn btn-primary" [disabled]="myForm.invalid" (click)="ajouter()">Save</button>
+    
+</form> -->
+
+

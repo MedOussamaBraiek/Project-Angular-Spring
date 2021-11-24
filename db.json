@@ -1,0 +1,129 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "id": 2,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "users": [
+    {
+      "id": 1,
+      "picture": "https://bootdey.com/img/Content/avatar/avatar3.png",
+      "accountCategory": "Admin",
+      "firstName": "Oussama",
+      "lastName": "Braiek",
+      "email": "oussemabraiek@gmail.com",
+      "password": "oussama",
+      "birthDate": "1998-11-02",
+      "profession": "Software Engineer"
+    },
+    {
+      "id": 2,
+      "firstName": "oussama",
+      "lastName": "Clooney",
+      "email": "marlon@brando.com",
+      "password": "test",
+      "birthDate": "1999-06-30",
+      "profession": "Software Engineer"
+    },
+    {
+      "id": 4,
+      "firstName": "Ryan",
+      "lastName": "Gossling",
+      "birthDate": "1999-06-30",
+      "accountCategory": "Golden",
+      "email": "Ryan@nicholson.com",
+      "password": "test",
+      "picture": "https://bootdey.com/img/Content/avatar/avatar4.png",
+      "profession": "Software Engineer"
+    },
+    {
+      "id": 5,
+      "picture": "https://bootdey.com/img/Content/avatar/avatar5.png",
+      "accountCategory": "Blocked Account",
+      "firstName": "Alaa",
+      "lastName": "Downey",
+      "email": "robert@nicholson.com",
+      "password": "test",
+      "birthDate": "1999-06-30",
+      "profession": "Software Engineer"
+    },
+    {
+      "firstName": "Oussama",
+      "lastName": "braiek",
+      "birthDate": "1998-11-02",
+      "email": "oussemabraiek@gmail.com",
+      "password": "hhhhhhhhh",
+      "profession": "Développer ",
+      "accountCategory": "Customer",
+      "picture": "https://bootdey.com/img/Content/avatar/avatar1.png",
+      "id": 7
+    },
+    {
+      "id": 8,
+      "firstName": "hhh",
+      "lastName": "Braiek",
+      "email": "hhh@gmail.com",
+      "password": "hhhhhhhh",
+      "birthDate": "1998-11-02",
+      "profession": "Etudiant"
+    },
+    {
+      "id": 9,
+      "picture": "https://bootdey.com/img/Content/avatar/avatar1.png",
+      "accountCategory": "Customer",
+      "firstName": "Alaa",
+      "lastName": "Hasnaoui",
+      "email": "fakher@gmail.com",
+      "password": "123456789",
+      "birthDate": "1998-10-10",
+      "profession": "Jouer"
+    }
+  ],
+  "products": [
+    {
+      "id": 3,
+      "code": "200",
+      "libelle": "PC",
+      "prixunitaire": "500",
+      "tauxTva": "500"
+    },
+    {
+      "id": 5,
+      "code": "128",
+      "libelle": "PC",
+      "prixunitaire": "1000",
+      "tauxTva": "10"
+    },
+    {
+      "id": 6,
+      "code": "7",
+      "libelle": "TV",
+      "prixunitaire": "1000",
+      "tauxTva": "20"
+    },
+    {
+      "id": 7,
+      "code": "10",
+      "libelle": "PC",
+      "prixunitaire": "599",
+      "tauxTva": "60"
+    }
+  ]
+}

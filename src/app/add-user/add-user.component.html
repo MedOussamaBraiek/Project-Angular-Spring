@@ -1,0 +1,93 @@
+<style>
+    p{
+        color: red;
+        font-size: bold;
+    }
+</style>
+
+<h3>Ajouter un noveau utilisateur:</h3>
+<form [formGroup]="userAddForm" (submit)="addUsr()">
+
+    <!-- <div class="form-group col-md-4 mb-3">
+        <label for="first" class="form-label">Id Customer</label>
+        <input type="number" class="form-control" placeholder="Id Customer" formControlName="IdCustomer">
+    </div> -->
+
+    <div class="form-group col-md-4 mb-3">
+        <label for="first" class="form-label">First Name</label>
+        <input type="text" class="form-control" placeholder="First Name" formControlName="firstName">
+        <p>{{msgError}}</p>
+    </div>
+   <!-- <div class="alert alert-danger" *ngIf="userAddForm.get('firstName').invalid">
+        <div *ngIf="userAddForm.get('firstName').errors.required">
+            First Name Obligatoire
+        </div> 
+        <div *ngIf="userAddForm.get('firstName').errors.pattern">
+            Pattern incorrect
+        </div>
+   </div> -->
+
+
+    <div class="form-group col-md-4 mb-3">
+        <label for="last" class="form-label" ngModel>Last Name</label>
+        <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName">
+        <p>{{msgError}}</p>
+    </div>
+    <!-- <div class="alert alert-danger" *ngIf="userAddForm.get('lastName').invalid">
+        <div  *ngIf="userAddForm.get('lastName').errors.required">
+            Last Name Obligatoire
+        </div> 
+        <div  *ngIf="userAddForm.get('lastName').errors.pattern">
+            Pattern incorrect
+        </div>
+    </div> -->
+
+
+    <div class="form-group col-md-4 mb-3">
+        <label for="birth" class="form-label" ngModel>BirthDate</label>
+        <input type="date" class="form-control" formControlName="birthDate">
+    </div>
+
+    
+    <div class="form-group col-md-4 mb-3">
+        <label for="email" class="form-label" ngModel>Email</label>
+        <input type="text" class="form-control"  placeholder="email@gmail.com" formControlName="email">
+        <p>{{msgError}}</p>
+    </div>
+
+    <!-- <div class="alert alert-danger" *ngIf="userAddForm.get('email').errors?.pattern">
+        Pattern incorrect
+    </div> -->
+   
+
+
+    <div class="form-group col-md-4 mb-3">
+        <label for="pwd" class="form-label" ngModel>Passwrod</label>
+        <input type="text" class="form-control" placeholder="Passwrod"  formControlName="password">
+        <p>{{msgError}}</p>
+    </div>
+
+    <!-- <div class="alert alert-danger" *ngIf="userAddForm.get('password').errors?.pattern">
+        Pattern incorrect
+    </div> -->
+   
+
+
+    <div class="form-group col-md-4 mb-3">
+        <label for="profession" class="form-label" ngModel>Profession</label>
+        <input type="text" class="form-control"  placeholder="Profession" formControlName="profession">
+    </div>
+
+    <div class="form-group col-md-4 mb-3">
+        <label for="cust" class="form-label" ngModel>Custormer Category</label>
+        <input type="text" class="form-control" readonly placeholder="Customer"  formControlName="accountCategory">
+    </div>
+
+    <input type="submit" class="btn btn-primary" value="Ajouter" [disabled]="userAddForm.invalid"> 
+    <button class="btn btn-success" (click)="addUsr()" [disabled]="userAddForm.invalid">Add</button>
+    
+</form>
+
+<app-error [error] = "err()" (msg)="errMsg($event)"></app-error>
+
+
