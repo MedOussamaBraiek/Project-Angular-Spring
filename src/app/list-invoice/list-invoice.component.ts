@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Invoice } from '../models/Invoice';
+import { InvoicesService } from '../services/invoices.service';
 
 @Component({
   selector: 'app-list-invoice',
@@ -7,21 +8,18 @@ import { Invoice } from '../models/Invoice';
   styleUrls: ['./list-invoice.component.css']
 })
 export class ListInvoiceComponent implements OnInit {
-
-  constructor() { }
+//el id te3 el facture li nhebbou nlawjou aaliha
+  factureId : number;
+  constructor(private factureS : InvoicesService) { }
   invoices: Invoice[];
   invoiceToEdit1: Invoice;
   show=false;
   showAdd=false;
+  invoiceToShow:Invoice;
   ngOnInit(): void {
-    this.invoices =[
-      { idInvoice: 1, discountAmount: 20, billAmount: 500, dateBill:
-      "14/07/2021" , Status : true},
-      { idInvoice: 2, discountAmount: 10, billAmount: 1000, dateBill:
-      "02/10/2020" , Status : false},
-      { idInvoice: 3, discountAmount: 50, billAmount: 200, dateBill:
-      "15/12/2021" , Status : false},
-      ]
+
+    this.getAllFactures();
+
   }
 
   deleteInvoice(i:number){
@@ -33,26 +31,60 @@ export class ListInvoiceComponent implements OnInit {
     this.show=false;
   }
 
-  addInvoice(){
-
-  }
-  
   editInvoice(x:Invoice){
     this.show=true;
     this.showAdd=false;
     this.invoiceToEdit1=x;
   }
 
-  
+
   editMyInvoice(i: Invoice){
-    
+
      for(let k in this.invoices){
-       if(this.invoices[k].idInvoice == i.idInvoice){
+       if(this.invoices[k].idFacture == i.idFacture){
           this.invoices[k] = i;
        }
      }
   }
   addInv(i: Invoice){
+    // add facture must pass an idClient
+    // facture need to have detail facture to work (pourcentage remise et produitId)
+    // this.factureS.addFacture(i,1).subscribe(
+    //   res => {
+    //     console.log(res);
+    //     this.invoices.push(res);
+    //   }
+
+    // )
+    //mech bech t'affichi chay khater 9a3ed tekhou fel données bel base te3 spring
     this.invoices.push(i);
   }
+
+  // getting data from spring !
+  getAllFactures(){
+    this.factureS.getAllFactures().subscribe(
+      res => {
+        console.log(res);
+        this.invoices = res ;
+      }
+    )
+  }
+
+  getOneById(){
+    this.factureS.getOneFacture(this.factureId).subscribe(
+      (res)=>{
+        console.log(res);
+
+      }
+    )
+  }
+
+
+
+
+
+
+
+
+
 }

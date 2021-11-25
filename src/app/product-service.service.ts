@@ -30,9 +30,9 @@ export class ProductServiceService {
       for(let i of products){
         if(i.libelle == libelle)
           this.count++;
-        else 
+        else
           this.count;
-      } 
+      }
     }
     this.c = this.count
     this.count=0;

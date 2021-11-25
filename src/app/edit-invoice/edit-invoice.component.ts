@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Invoice } from '../models/Invoice';
+import { Invoice } from '../models/Invoice'
 
 @Component({
   selector: 'app-edit-invoice',
@@ -12,30 +12,30 @@ export class EditInvoiceComponent implements OnInit {
   @Output() edited = new EventEmitter<Invoice>()
   FormInvoice : FormGroup;
   idInvoice = 0;
- 
+
   constructor() { }
 
   ngOnInit(): void {
-    
+
   }
 
 
   ngOnChanges(change: SimpleChanges){
     if(change.invoiceToEdit.firstChange){
       this.FormInvoice = new FormGroup({
-        idInvoice:new FormControl({value:this.invoiceToEdit.idInvoice,disabled:true}),
-        discountAmount: new FormControl(this.invoiceToEdit.discountAmount),
-        billAmount : new FormControl(this.invoiceToEdit.billAmount),
-        dateBill : new FormControl(this.invoiceToEdit.dateBill),
-        Status: new FormControl(this.invoiceToEdit.Status)
+        idInvoice:new FormControl({value:this.invoiceToEdit.idFacture,disabled:true}),
+        discountAmount: new FormControl(this.invoiceToEdit.montantFacture),
+        billAmount : new FormControl(this.invoiceToEdit.montantRemise),
+        dateBill : new FormControl(this.invoiceToEdit.dateFacture),
+        Status: new FormControl(this.invoiceToEdit.active)
       })
     }
     else{
-    this.FormInvoice.setControl('idInvoice',new FormControl(this.invoiceToEdit.idInvoice));
-    this.FormInvoice.setControl('discountAmount',new FormControl(this.invoiceToEdit.discountAmount));
-    this.FormInvoice.setControl('billAmount',new FormControl(this.invoiceToEdit.billAmount));
-    this.FormInvoice.setControl('dateBill',new FormControl(this.invoiceToEdit.dateBill));
-    this.FormInvoice.setControl('Status',new FormControl(this.invoiceToEdit.Status));
+    this.FormInvoice.setControl('idInvoice',new FormControl(this.invoiceToEdit.idFacture));
+    this.FormInvoice.setControl('discountAmount',new FormControl(this.invoiceToEdit.montantFacture));
+    this.FormInvoice.setControl('billAmount',new FormControl(this.invoiceToEdit.montantRemise));
+    this.FormInvoice.setControl('dateBill',new FormControl(this.invoiceToEdit.dateFacture));
+    this.FormInvoice.setControl('Status',new FormControl(this.invoiceToEdit.active));
     }
   }
 

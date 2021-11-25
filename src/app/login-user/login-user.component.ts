@@ -40,18 +40,18 @@ export class LoginUserComponent implements OnInit {
     this.data.getAllUserFromDb().subscribe(res => {
       this.list = res;
     });
-    this.list.forEach((user) => 
+    this.list.forEach((user) =>
       {
         if (user.email === myForm.controls['email'].value &&
           user.password === myForm.controls['password'].value) {
           //this.router.navigate(['/']);
           this.text1 = "Welcome";
-          this.text2 = user.firstName + " " +user.lastName; 
+          this.text2 = user.firstName + " " +user.lastName;
           alert('Successfully Loged In')
           this.find=true;
           this.reset();
         }
-        
+
       })
         if(this.find == false) {
           alert('please give a valid account')
@@ -60,20 +60,21 @@ export class LoginUserComponent implements OnInit {
 
       }
 
-    
-  checkUser(myForm: FormGroup) {
-    this.data.list.forEach(
-      (user) => {
-        if (user.email === myForm.controls['email'].value &&
-          user.password === myForm.controls['password'].value) {
-          this.router.navigate(['/'])
-        }
-        else {
-          this.msg = 'please give a valid account'
-        }
-      }
-    );
-  }
+
+
+  // checkUser(myForm: FormGroup) {
+  //   this.data.list.forEach(
+  //     (user) => {
+  //       if (user.email === myForm.controls['email'].value &&
+  //         user.password === myForm.controls['password'].value) {
+  //         this.router.navigate(['/'])
+  //       }
+  //       else {
+  //         this.msg = 'please give a valid account'
+  //       }
+  //     }
+  //   );
+  // }
 
   reset() {
     this.myForm.reset();
@@ -94,6 +95,6 @@ export class LoginUserComponent implements OnInit {
     //     alert('Successfully Loged In');
     //     this.reset();
     //   }
-    //   else  
+    //   else
     //     alert('please give a valid account');
     // })

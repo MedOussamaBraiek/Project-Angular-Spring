@@ -1,7 +1,7 @@
 export class Invoice {
-    idInvoice !: number;
-    discountAmount: number;
-    billAmount!: number;
-    dateBill !: String;
-    Status!: Boolean;
+    idFacture !: number;
+    montantRemise: number;
+    montantFacture!: number;
+    dateFacture !: String;
+    active!: Boolean;
     }
