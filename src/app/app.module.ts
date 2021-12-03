@@ -26,6 +26,10 @@ import { UserService } from './user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ListProductsComponent } from './list-products/list-products.component';
 import { FormProductsComponent } from './form-products/form-products.component';
+import { ShopComponent } from './shop/shop.component';
+import { DetailFactureComponent } from './detail-facture/detail-facture.component';
+
+import { ListFournisseurComponent } from './list-fournisseur/list-fournisseur.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +53,10 @@ import { FormProductsComponent } from './form-products/form-products.component';
     AddUserComponent,
     ErrorComponent,
     ListProductsComponent,
-    FormProductsComponent
+    FormProductsComponent,
+    ShopComponent,
+    DetailFactureComponent,
+    ListFournisseurComponent
   ],
   imports: [
     BrowserModule,

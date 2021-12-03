@@ -28,10 +28,10 @@
                     {{ u.active }}
                 </td>
                 <td>
-                    <button class="btn btn-warning" (click)="editInvoice(u)" >Modifier</button>
+                    <button class="btn btn-warning"  >Modifier</button>
                 </td>
                 <td>
-                    <button class="btn btn-danger" (click)="deleteInvoice(i)">Supprimer</button>
+                    <button class="btn btn-danger" >Supprimer</button>
 
                 </td>
 
@@ -39,12 +39,17 @@
     </tbody>
 </table>
 
-<button class="btn btn-success" (click)="showForm()">Ajouter</button>
+<button class="btn btn-success" >Ajouter</button>
 
-<app-add-invoice (aded)="addInv($event)" *ngIf="showAdd" ></app-add-invoice>
+<app-add-invoice  *ngIf="showAdd" ></app-add-invoice>
 
-<app-edit-invoice [invoiceToEdit]="invoiceToEdit1" *ngIf="show" (edited)="editMyInvoice($event)" ></app-edit-invoice>
+<app-edit-invoice [invoiceToEdit]="invoiceToEdit1" *ngIf="show"  ></app-edit-invoice>
 
+(click)="editInvoice(u)"
+(click)="deleteInvoice(i)"
+(click)="showForm()"
+(aded)="addInv($event)"
+(edited)="editMyInvoice($event)"
 
        <!-- <ul *ngFor = "let u of invoices; let i = index;">
             <li>{{ u.idInvoice }}</li>

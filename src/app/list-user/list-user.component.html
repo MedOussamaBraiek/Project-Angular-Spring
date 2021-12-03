@@ -1,5 +1,12 @@
+<div class="form-group col-md-4 mb-3">
+	<label for="date" class="form-label "><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+	  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+	</svg> Name:</label>
+	<input [(ngModel)]="search" class="form-control" (keyup)="getClient()">
+  </div>
+
 <div class="container table-responsive">
-	<input type="text" class="form-control" name="category" placeholder="select a name" [(ngModel)]="searchVal">
+	<!-- <input type="text" class="form-control" name="category" placeholder="select a name" [(ngModel)]="searchVal"> -->
 	<br>
 
 	<table class="table table-bordered table-hover">
@@ -18,48 +25,98 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr *ngFor="let user of list" [hidden]="!(searchVal == '' || user.firstName == searchVal)"
-				[style.background-color]="user.accountCategory=='Blocked Account'? 'yellow' : ''">
-				<td><img src={{user.picture}}></td>
-				<td>{{user.id}}</td>
-				<td>{{user.firstName}}</td>
-				<td>{{user.lastName}}</td>
-				<td>{{user.birthDate}}</td>
-				<td>{{user.profession}}</td>
-				<td>{{user.email}}</td>
-				<td>{{user.accountCategory}}</td>
-				<td>{{user.password}}</td>
+			<tr *ngFor="let client of list1">
+				<td></td>
+				<td>{{client.idClient}}</td>
+				<td>{{client.prenom}}</td>
+				<td>{{client.nom}}</td>
+				<td>{{client.dateNaissance}}</td>
+				<td>{{client.profession}}</td>
+				<td>{{client.email}}</td>
+				<td>{{client.categorieClient}}</td>
+				<td>{{client.password}}</td>
 
 				<td>
-					<!-- updateClient -->
-					<button (click)="updateClient(user, user.id)" type="button" data-bs-toggle="modal"
-						data-bs-target="#editmodal" class="btn btn-primary"><svg
-							xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-							class="bi bi-pencil-square" viewBox="0 0 16 16">
-							<path
-								d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-							<path fill-rule="evenodd"
-								d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-						</svg></button>
-						<!-- deleteClient -->
-					<button class="btn btn-danger" [disabled]="user.accountCategory=='Admin'"
-						(click)="deleteUser(user)" data-bs-toggle="modal"
-						data-bs-target="#supprimer"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-							fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-							<path
-								d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-							<path fill-rule="evenodd"
-								d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-						</svg></button>
+					<!-- Update Client -->
+					<button class="btn btn-primary" data-bs-toggle="modal"
+					data-bs-target="#editmodal" (click)="updateClient(client, client.idClient)"><svg
+						xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+						class="bi bi-pencil-square" viewBox="0 0 16 16">
+						<path
+							d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+						<path fill-rule="evenodd"
+							d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+					</svg></button>
 
+					<!-- Delete Client -->
+					<button class="btn btn-danger mx-2" (click)="deleteClient(client.idClient)" data-bs-toggle="modal"
+					data-bs-target="#supprimer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+						fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+						<path
+							d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+						<path fill-rule="evenodd"
+							d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+					</svg></button>
 				</td>
+
+				<td>
+					<button class="btn btn-info" (click)="getFactures(client)" data-bs-toggle="modal"
+					data-bs-target="#factures">FACTURES</button>
+				</td>
+				
 			</tr>
+
+
+
 		</tbody>
 	</table>
 </div>
 
 
-<!-- Button trigger modal -->
+
+  <!-- Modal Delete Client-->
+  <div class="modal fade" id="factures" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Factures</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>IDFacture</th>
+						<th>Active</th>
+						<th>DateFacture</th>
+						<th>MontantFacture</th>
+						<th>MontantRemise</th>
+						<!-- <th>IDClient</th>		 -->
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let factures of listFactures">
+						<td>{{factures.idFacture}}</td>
+						<td>{{factures.active}}</td>
+						<td>{{factures.dateFacture}}</td>
+						<td>{{factures.montantFacture}}</td>
+						<td>{{factures.montantRemise}}</td>
+						<!-- <td>{{factures.client.idClient}}</td> -->
+					</tr>
+				</tbody>
+			</table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="oui()">Oui</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<!-- Modal Update Client -->
 <div class="modal fade" id="editmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -71,18 +128,18 @@
 				<form [formGroup]="userForm">
 					<div class="mb-3">
 						<label for="id" class="form-label">ID</label>
-						<input type="text" class="form-control" id="id" aria-describedby="emailHelp" formControlName="IdCustomer" readonly>
+						<input type="text" class="form-control" id="id" formControlName="IdCustomer" readonly>
 						
 					  </div>
 
 					<div class="mb-3">
 					  <label for="first" class="form-label">First Name</label>
-					  <input type="text" class="form-control" id="first" aria-describedby="emailHelp" formControlName="firstName">
+					  <input type="text" class="form-control" id="first" formControlName="firstName">
 					  
 					</div>
 					<div class="mb-3">
 						<label for="last" class="form-label">Last Name</label>
-						<input type="text" class="form-control" id="last" aria-describedby="emailHelp" formControlName="lastName">
+						<input type="text" class="form-control" id="last" formControlName="lastName">
 						
 					  </div>
 					  <div class="mb-3">
@@ -92,17 +149,28 @@
 					  </div>
 					  <div class="mb-3">
 						<label for="pass" class="form-label">Password</label>
-						<input type="text" class="form-control" id="pass" aria-describedby="emailHelp" formControlName="password">
+						<input type="text" class="form-control" id="pass" formControlName="password">
 		
 					  </div>
+
+					  <div class="mb-3">
+						<label for="categorie" class="form-label">Category</label>
+						
+						<select class="form-select mt-1" name="categorie" formControlName="categorie" aria-label="Default select example">
+							<option value="Premuim">Premuim</option>
+							<option value="Ordinaire">Ordinaire</option>
+							<option value="Fidele">Fidele</option>
+						</select>
+					</div>
+
 					  <div class="mb-3">
 						<label for="birth" class="form-label">Birthday</label>
-						<input type="date" class="form-control" id="birth" aria-describedby="emailHelp" formControlName="birthDate">
+						<input type="date" class="form-control" id="birth" formControlName="birthDate">
 						
 					  </div>
 					  <div class="mb-3">
-						<label for="job" class="form-label">Job</label>
-						<input type="text" class="form-control" id="job" aria-describedby="emailHelp" formControlName="profession">
+						<label for="job" class="form-label">Profession</label>
+						<input type="text" class="form-control" id="job" formControlName="profession">
 						
 					  </div>
 					<!-- <div class="mb-3">
@@ -122,7 +190,7 @@
 
 
 
-  <!-- Modal -->
+  <!-- Modal Delete Client-->
   <div class="modal fade" id="supprimer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">

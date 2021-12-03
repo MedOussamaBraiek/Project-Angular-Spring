@@ -1,0 +1,83 @@
+
+<ng-container *ngIf="product.length != 0" class="mb-5">
+    <button class="btn btn-warning" (click)="back()">Shop More</button>
+    <div class="container">
+        <div class="card-table">
+            <div class="cart-product">
+                <table class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Sr.No</th>
+                            <th>Product Name</th>
+                            <th>Product Image</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Totla</th>
+                            <th>Remise</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of product; let i=index;">
+                            <td>{{item.idProduit}}</td>
+                            <td>{{item.code}}</td>
+                            <td><img style="width:120px" src="" alt=""></td>
+                            <td>{{item.libelle}}</td>
+                            <td>{{item.prixUnitaire}}</td>
+                            <td>{{item.quantite}}</td>
+                            <td>{{item.prixUnitaire*item.quantite}}</td>
+                            <td>{{item.remise}}</td>
+                            <td>
+                                <button class="btn btn-danger" (click)="deletProduct(item)"><i class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <button (click)="deletAllProduct()" class="btn btn-danger">Clear</button>
+        <div class="d-flex justify-content-end">
+            <h5 class="mx-2">{{quantityTotal}} Products</h5>
+            <h5 class="mx-2">Total Price: {{prixTotal}}$</h5>
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#buy" (click)="addFacture()">Buy Now</button>
+        </div>
+    </div>
+</ng-container>
+
+
+<ng-container *ngIf="product.length == 0">
+    <div class="container">
+        <div class="card">
+            <h5 class="card-title">My Cart</h5>
+        </div>
+        <div class="center">
+            <img src="" alt="">
+            <h4>Your cart us empty!</h4>
+            <h6>Add item to it now</h6>
+            <button class="btn btn-primary" (click)="back()">Shop Now</button>
+        </div>
+    </div>
+</ng-container>
+
+  <!-- Modal -->
+  <div class="modal fade" id="buy" tabindex="-1" aria-labelledby="buy" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Facture</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h6>Thank you for buying from our shop {{n}} {{prenom}}</h6>
+          <h6>Facture montant {{mf}}</h6>
+          <h6>Facture remise {{mr}}</h6>
+          <h6>{{date}}</h6>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Print</button>
+        </div>
+      </div>
+    </div>
+  </div>

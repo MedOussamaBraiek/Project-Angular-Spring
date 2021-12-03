@@ -12,18 +12,30 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/user">Users</a>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            List
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+            <li><a class="dropdown-item" routerLink="/product">Products</a></li>
+            <li><a class="dropdown-item"routerLink="/user">Client</a></li>
+            <li><a class="dropdown-item" routerLink="/fournisseur">Provider</a></li>
+            <li><a class="dropdown-item" routerLink="/stocks">Stock</a></li>
+            <li><a class="dropdown-item" routerLink="/rayons">Rayon</a></li>
+          </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/product">Products</a>
-        </li>
-        <li class="nav-item">
+
+        <!-- <li class="nav-item">
+          <a class="nav-link" routerLink="/shop">Shop</a>
+        </li> -->
+
+        <!-- <li class="nav-item">
           <a class="nav-link" routerLink="/provider">Provide</a>
         </li>
         <li class="nav-item" >
           <a class="nav-link" routerLink="/invoice">Invoices</a>
-        </li>
+        </li> -->
         <li class="nav-item" >
           <a class="nav-link" routerLink="/subscribe"><span>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-list" viewBox="0 0 16 16">
@@ -39,6 +51,11 @@
           </svg></span> Login</a>
         </li>
       </ul>
+      <button class="btn btn-outline-dark" routerLink="/facture">
+       
+        <i style="font-size: 25px;" class="fas fa-cart-plus"></i>
+        <div style="font-size: 10px;" class="badge bg-danger" (click)="navigate()">{{count1}}</div>
+      </button>
     </div>
   </div>
 </nav>

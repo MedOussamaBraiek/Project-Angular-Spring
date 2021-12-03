@@ -1,0 +1,95 @@
+<table class="table user-list">
+    <thead>
+      <tr>
+        <th><span>Quantity</span></th>
+        <th><span>Minimum Quantity</span></th>
+        <th><span>Label</span></th>
+        <th><span>Products</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let s of listStock; let i = index">
+        <td>
+          {{ s.qte }}
+        </td>
+        <td>
+          {{ s.qteMin }}
+        </td>
+        <td>
+          {{ s.libelleStock }}
+        </td>
+        <td>
+          <a class="btn btn-info" [routerLink]="['/stocks', s.idStock]"
+            >details</a
+          >
+        </td>
+        <td>
+          <button class="btn btn-danger" (click)="deleteStock(s)">delete</button>
+        </td>
+        <td>
+          <button class="btn btn-secondary" (click)="updateStock(s)">
+            update
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <button class="btn btn-success" (click)="showForm()">Ajouter</button>
+  <button class="btn btn-danger" *ngIf="showAddStock" (click)="closeForm()">
+    Cancel
+  </button>
+  
+  <form [formGroup]="addStockForm" *ngIf="showAddStock">
+    <div class="form-group col-md-4 mb-3">
+      <label for="first" class="form-label">Quantity</label>
+      <input type="number" class="form-control" formControlName="qte" />
+    </div>
+    <div class="form-group col-md-4 mb-3">
+      <label class="form-label">Min Quantity</label>
+      <input type="number" class="form-control" formControlName="qteMin" />
+    </div>
+  
+    <div class="form-group col-md-4 mb-3">
+      <label class="form-label">Facture Status</label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="Stock Label"
+        formControlName="libelleStock"
+      />
+    </div>
+    <button class="btn btn-success" (click)="addStock()">Add</button>
+  </form>
+  
+  <form [formGroup]="updateStockForm" *ngIf="showUpdateStock">
+    <div class="form-group col-md-4 mb-3">
+      <label for="first" class="form-label">id</label>
+      <input
+        readonly
+        type="number"
+        class="form-control"
+        formControlName="idStock"
+      />
+    </div>
+    <div class="form-group col-md-4 mb-3">
+      <label for="first" class="form-label">Quantity</label>
+      <input type="number" class="form-control" formControlName="qte" />
+    </div>
+    <div class="form-group col-md-4 mb-3">
+      <label class="form-label">Min Quantity</label>
+      <input type="number" class="form-control" formControlName="qteMin" />
+    </div>
+  
+    <div class="form-group col-md-4 mb-3">
+      <label class="form-label">Facture Status</label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="Stock Label"
+        formControlName="libelleStock"
+      />
+    </div>
+    <button class="btn btn-success" (click)="update()">Update</button>
+  </form>
+  
