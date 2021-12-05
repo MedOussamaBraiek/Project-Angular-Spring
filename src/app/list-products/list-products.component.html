@@ -6,11 +6,11 @@
   </svg> Libelle:</label>
   <input [(ngModel)]="search" class="form-control" (keyup)="getproducts()">
 </div>
-   
-
-<table class="table user-list">
+  
+<table class="table user-list table-responsive">
     <thead>
         <tr>
+            <th><span>Image</span></th>
             <th><span>IdProduct</span></th>
             <th><span>Code</span></th>
             <th><span>Libelle</span></th>
@@ -27,6 +27,9 @@
          
             <tr *ngFor = "let p of Listproduit; let i = index;  " #pr>
               
+                <td>
+                  <img style="width: 50px; height: 50px;" src={{p.url}} alt="">
+                </td>
                 <td>
                     {{ p.idProduit }}
                 </td>
@@ -95,13 +98,61 @@
 </div>
 
 <div class="container d-flex justify-content-center">
-<button (click)="show()" class="btn btn-success mt-3 w-50 " data-bs-toggle="modal"
+<button  class="btn btn-success mt-3 w-50 " data-bs-toggle="modal"
 data-bs-target="#addProduct">Add product</button>
 </div>
 
 
 
 <!-- <app-form-products *ngIf=isShowing (added)="addProductt($event)"></app-form-products> -->
+
+
+  <!-- <div class="container d-flex justify-content-center">
+  <button  class="btn btn-success mt-3 w-50 " data-bs-toggle="modal"
+  data-bs-target="#assignptoduct">Assign au fournisseur</button>
+  </div> -->
+  <div class="container d-flex justify-content-center">
+    <form [formGroup]="formasign">
+    
+      <div class="row">
+        <input type="text" class="form-control w-50 mt-4 mx-1" formControlName="idFournisseur" placeholder="IdFournisseur">
+        <input type="text" class="form-control w-50 mt-4" formControlName="idproduit" placeholder="IdProduit">
+  
+        <button class="btn btn-info w-25 mt-3 mx-3" (click)="assignftop()">Assign</button>
+      </div>   
+    </form>
+</div>
+
+
+  <!-- <div class="modal fade" id="assignptoduct" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Asign Produit au fournisseur</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label=""></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="formasign">
+  
+            <div class="mb-3">
+              <label for="idproduit" class="form-label">idproduit</label>
+              <input type="text" class="form-control" id="idproduit" formControlName="idproduit">
+              
+            </div>
+            <div class="mb-3">
+              <label for="idFournisseur" class="form-label">idFournisseur</label>
+              <input type="text" class="form-control" id="idFournisseur" formControlName="idFournisseur">
+              
+              </div>
+           </form>
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+         <button type="button" class="btn btn-primary" (click)="assignftop()" >Assign</button>
+       </div>
+     </div>
+   </div> -->
+
 
 
 
@@ -191,11 +242,11 @@ data-bs-target="#addProduct">Add product</button>
 
 
   <!--modal ajouter-->
-<div class="modal fade" id="addProduct" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Ajouter Produit</h5>
+				<h5 class="modal-title">Ajouter Produit</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="id"></button>
 			</div>
 			<div class="modal-body">
@@ -238,6 +289,12 @@ data-bs-target="#addProduct">Add product</button>
 						<input type="text" class="form-control" id="idStock" formControlName="idStock">
 		
 					  </div>
+
+          <div class="mb-3">
+          <label for="url" class="form-label">Url Image</label>
+          <input type="text" class="form-control" id="url" formControlName="url">
+          </div>
+
 				  </form>
 			</div>
 			<div class="modal-footer">

@@ -48,8 +48,7 @@ export class LoginUserComponent implements OnInit {
   login(myForm: FormGroup) {
     this.cs.getAllClient().subscribe(res => {
       this.clients = res;
-
-
+      
       this.clients.forEach(client =>
         {
           if (client.email === myForm.controls['email'].value &&

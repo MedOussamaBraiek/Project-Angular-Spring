@@ -51,6 +51,13 @@ export class ListUserComponent implements OnInit {
   listClient:Client[];
   search="";
 
+  //chiffre Affaire
+  cat:string;
+  date1:Date;
+  date2:Date;
+  myChiffre:FormGroup;
+  chiffre:number;
+
   ngOnInit(): void {  //declancher automatiquement apres le constructeur
     
     //this.getAllClients();
@@ -66,6 +73,11 @@ export class ListUserComponent implements OnInit {
       password : new FormControl('', [Validators.required, Validators.pattern("^[a-zA-Z0-9]{8,}?")]),
       profession: new FormControl('',[Validators.required]),
       categorie: new FormControl('')
+    })
+
+    this.myChiffre = new FormGroup({
+      d1: new FormControl(''),
+      d2: new FormControl('')
     })
     
   };
@@ -204,5 +216,13 @@ logg(o: Login){
       
   }
 }
+
+  getChiffreAffaire(){
+    this.ac.paramMap.subscribe(res => {this.cat = res.get('category');});
+    this.date1 = this.myChiffre.value.d1;
+    this.date2 = this.myChiffre.value.d2;
+    this.cs.getChiffreAffaireParCategorieClient(this.cat,this.date1, this.date2)
+    .subscribe(res => this.chiffre = res);
+  }
 
 }

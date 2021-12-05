@@ -18,11 +18,11 @@
             List
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-            <li><a class="dropdown-item" routerLink="/product">Products</a></li>
-            <li><a class="dropdown-item"routerLink="/user">Client</a></li>
-            <li><a class="dropdown-item" routerLink="/fournisseur">Provider</a></li>
-            <li><a class="dropdown-item" routerLink="/stocks">Stock</a></li>
-            <li><a class="dropdown-item" routerLink="/rayons">Rayon</a></li>
+            <li><a class="dropdown-item" routerLink="/admin/product">Products</a></li>
+            <li><a class="dropdown-item"routerLink="/admin/user">Client</a></li>
+            <li><a class="dropdown-item" routerLink="/admin/fournisseur">Provider</a></li>
+            <li><a class="dropdown-item" routerLink="/admin/stocks">Stock</a></li>
+            <li><a class="dropdown-item" routerLink="/admin/rayons">Rayon</a></li>
           </ul>
         </li>
 
@@ -36,7 +36,7 @@
         <li class="nav-item" >
           <a class="nav-link" routerLink="/invoice">Invoices</a>
         </li> -->
-        <li class="nav-item" >
+        <!-- <li class="nav-item" >
           <a class="nav-link" routerLink="/subscribe"><span>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-list" viewBox="0 0 16 16">
               <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
@@ -49,19 +49,42 @@
             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
             <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
           </svg></span> Login</a>
-        </li>
+        </li> -->
       </ul>
-      <button class="btn btn-outline-dark" routerLink="/facture">
+      <button class="btn btn-outline-dark" routerLink="/admin/shop">
        
         <i style="font-size: 25px;" class="fas fa-cart-plus"></i>
         <div style="font-size: 10px;" class="badge bg-danger" (click)="navigate()">{{count1}}</div>
       </button>
+
+      <button class="btn btn-danger" data-bs-toggle="modal"
+      data-bs-target="#logout"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+        <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+      </svg></button>
     </div>
   </div>
 </nav>
 <br>
 
-
+<!-- Modal Delete Client-->
+<div class="modal fade" id="logout" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Logout</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Êtes-vous sûr de vouloir quitter?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="oui()">Oui</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

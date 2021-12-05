@@ -10,6 +10,9 @@ import { produit } from '../models/produit';
 })
 export class ProductsService {
   url : string = "http://localhost:8089/SpringMVC/products"
+
+  url1 : string = "http://localhost:8089/SpringMVC/fournisseurs"
+
   httpOptions = {headers : new HttpHeaders({
     'Content-Type':'application/json'
   })}
@@ -58,4 +61,8 @@ export class ProductsService {
     return this.http.get<number[]>(this.url+'/allrevenueBrutact');
   
   }
+
+  assignfournisseurtoproduit(idfournisseur:number,idProduit:number){
+    return this.http.put<produit>(this.url1+`/${idfournisseur}`+'/assign'+`/${idProduit}`,this.httpOptions);
+    }
 }

@@ -30,6 +30,8 @@ import { ShopComponent } from './shop/shop.component';
 import { DetailFactureComponent } from './detail-facture/detail-facture.component';
 
 import { ListFournisseurComponent } from './list-fournisseur/list-fournisseur.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,9 @@ import { ListFournisseurComponent } from './list-fournisseur/list-fournisseur.co
     FormProductsComponent,
     ShopComponent,
     DetailFactureComponent,
-    ListFournisseurComponent
+    ListFournisseurComponent,
+    WelcomeComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

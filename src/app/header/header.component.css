@@ -9,3 +9,12 @@ img{
 .dropdown:hover .dropdown-menu{
     display:block;
 }
+
+.nav {
+    display: flex;
+}
+
+.btn-danger{
+    display: flex;
+    justify-content: flex-end;
+}

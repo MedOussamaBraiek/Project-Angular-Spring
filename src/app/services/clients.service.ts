@@ -37,4 +37,8 @@ export class ClientsService {
   getOneById(id:number):Observable<Client>{
     return this.http.get<Client>(this.url+`/client/${id}`);
   }
+
+  getChiffreAffaireParCategorieClient(cat:string, d1:Date, d2:Date):Observable<number>{
+    return this.http.get<number>(this.url+`/getTotal/${cat}/${d1}/${d2}`);
+  }
 }

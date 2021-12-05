@@ -30,4 +30,8 @@ export class FournisseursService {
   updateFournisseur(data: any){
     return this.http.put<fournisseur>(this.url + "/modify" , data, this.httpOptions);
   }
+
+  getOneFournisseur(id: number){
+    return this.http.get<fournisseur>(this.url + "/get-one/" + id);
+  }
 }

@@ -7,6 +7,7 @@ import { produit } from '../models/produit';
 import { rayon } from '../models/rayon';
 import { stock } from '../models/stock';
 import { ProductServiceService } from '../product-service.service';
+import { FournisseursService } from '../services/fournisseurs.service';
 import { ProductsService } from '../services/products.service';
 
 @Component({
@@ -25,11 +26,13 @@ export class ListProductsComponent implements OnInit {
   iss:boolean=false;
   isShowing: boolean = false;
   formProduct: FormGroup;
+  formasign:FormGroup;
 listrevenue:number[];  
 revenue1:number;
 count1: number = 0;
   c:number = 0;
  search="";
+ url:string="";
   product: Product = new Product();
   
   Produit:produit={
@@ -60,7 +63,8 @@ count1: number = 0;
      rayon: new rayon,
      stock: new stock,
      detailProduit: new detailProduit,
-     fournisseurs: []
+     fournisseurs: [],
+     url: 'https://media.ldlc.com/r1600/ld/products/00/05/88/61/LD0005886177_1.jpg'
    };
    p2:produit={
     idProduit: 0,
@@ -74,9 +78,12 @@ count1: number = 0;
   };
   confirmation = false;
   p: Product;
+  libelle5:string;
+  lib:any;
 
   pAdd: Product;
-  constructor(private productService: ProductServiceService,private produitService:ProductsService) { }
+
+  constructor(private productService: ProductServiceService,private produitService:ProductsService, private fs: FournisseursService) { }
 
   ngOnInit(): void {
     this.getproduit();
@@ -89,9 +96,15 @@ count1: number = 0;
     prixUnitaire: new FormControl('',[Validators.required]),
     categorieProduit: new FormControl('',[Validators.required]),
     idRayon: new FormControl('',[Validators.required]),
-    idStock: new FormControl('',[Validators.required])
-    })
+    idStock: new FormControl('',[Validators.required]),
+    url: new FormControl('')
+    });
     //this.getproducts();
+
+    this.formasign=new FormGroup({
+      idproduit:new FormControl(''),
+      idFournisseur:new FormControl('')
+    })
    
   }
   getproduit(){
@@ -150,7 +163,10 @@ count1: number = 0;
     this.p1.prixUnitaire=this.formProduct.value['prixUnitaire'];
     this.p1.detailProduit.categorieProduit=this.formProduct.value['categorieProduit'];
     
-    
+    this.p1.url = this.formProduct.value['url'];
+
+    console.log(this.p1.url);
+
     this.produitService.addProduct(this.p1,this.formProduct.value.idRayon,this.formProduct.value.idStock).subscribe(res=>{
       alert("Product added successfully");
       this.getproduit();
@@ -162,7 +178,18 @@ count1: number = 0;
   }
   
  
+  assignftop(){
+    this.fs.getOneFournisseur(this.formasign.value.idFournisseur).subscribe(res1 => this.lib = res1.libelle);
+    this.produitService.assignfournisseurtoproduit(this.formasign.value.idFournisseur,this.formasign.value.idproduit).subscribe(
+      (res)=>{
+        this.produitService.getOneProductById(this.formasign.value.idproduit).subscribe(res=>{
+          this.libelle5=res.libelle;
 
+          alert(" Le produit " + res.libelle +" est ajouter au fournisseur "+ this.lib)
+        });
+      this.libelle5="";
+      }
+    )}
 
 
 

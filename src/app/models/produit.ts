@@ -14,4 +14,5 @@ export class produit{
   stock : stock ;
   detailProduit ?: detailProduit ;
   fournisseurs : fournisseur[];
+  url?:string;
 }

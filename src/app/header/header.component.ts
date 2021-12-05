@@ -25,4 +25,9 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/facture/'+this.p]);
   }
 
+  oui(){
+    this.router.navigate(['/welcome']);
+    this.p = '';
+  }
+
 }

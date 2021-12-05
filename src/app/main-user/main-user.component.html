@@ -1,7 +1,9 @@
-    <!---start usersList section--->
-    <div class="row row-cols-1 row-cols-md-2 g-4">
+ 
+ <!---start usersList section--->
+    <div class="container">
+      <div class="row row-cols-1 row-cols-md-2 g-4">
         <div class="col-md-3">
-          <div class="card">
+          <div class="card bg-success text-white">
             <img src="assets/admin.png" class="card-img-top img-fluid" alt="...">
             <div class="card-body">
               <h5 class="card-title">Admin Account</h5>
@@ -11,17 +13,17 @@
           </div>
         </div>
         <div class="col-md-3">
-          <div class="card">
+          <div class="card bg-info ">
             <img src="assets/customer.png" class="card-img-top img-fluid" alt="...">
             <div class="card-body">
               <h5 class="card-title">Fidele Account</h5>
-              <p class="card-text">A Fidele Account is a centralized place to manage all billing information about customers</p>
+              <p class="card-text">Fidele Account a  place to manage information about customers</p>
               <a [routerLink]="['./listuser','Fidele']" class="btn btn-primary">show all</a>
             </div>
           </div>
         </div>
         <div class="col-md-3">
-          <div class="card">
+          <div class="card bg-danger text-white">
             <img src="assets/golden.png" class="card-img-top img-fluid" alt="...">
             <div class="card-body">
               <h5 class="card-title">Ordinaire Account</h5>
@@ -31,7 +33,7 @@
           </div>
         </div>
         <div class="col-md-3">
-          <div class="card">
+          <div class="card bg-warning ">
             <img src="../assets/blocked.png" class="card-img-top img-fluid" alt="...">
             <div class="card-body">
               <h5 class="card-title">Premuim Account</h5>
@@ -41,6 +43,8 @@
           </div>
         </div>
       </div>
+    </div>
       <!-- <app-form-user></app-form-user> -->
       <router-outlet></router-outlet>
       <!---end usersList section--->
+    

@@ -1,0 +1,10 @@
+p a:hover{
+	display: block;
+	text-decoration: none;
+	font-size: 0.9rem;
+	transition: .3s;
+}
+
+.list-unstyled li a :hover{
+    color: red;
+}

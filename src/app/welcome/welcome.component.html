@@ -1,0 +1,143 @@
+
+<body>
+	<img class="wave" src="assets/wave.png">
+	<div class="container">
+		<div id="b" class="img col-md-6">
+			<img src="assets/bg1.svg">
+		</div>
+		<div id="f" class="login-content col-md-6">
+			<form action="index.html" [formGroup]="myForm" (ngSubmit)="login(myForm)" *ngIf="!hide">
+				<img src="assets/welcome2.svg">
+				<h2 class="title">Welcome</h2>
+           		<div class="input-div one focus">
+           		   <div class="i">
+           		   		<i class="fas fa-user"></i>
+           		   </div>
+           		   <div class="div">
+           		   		<h5 id="s">Email</h5>
+           		   		<input type="text" class="input" formControlName="email">
+           		   </div>
+           		</div>
+
+                   <div class="alert alert-danger mt-1"
+                      *ngIf="myForm.controls['email'].invalid && myForm.controls['email'].touched">
+
+
+                      <div *ngIf="myForm.controls['email'].hasError('required')">this is a required field</div>
+                      <div *ngIf="myForm.controls['email'].hasError('pattern')">Wrong format </div>
+
+                  </div>
+                
+
+           		<div class="input-div pass focus">
+           		   <div class="i"> 
+           		    	<i class="fas fa-lock"></i>
+           		   </div>
+           		   <div class="div">
+           		    	<h5 id="p">Password</h5>
+           		    	<input type="password" class="input" formControlName="password">
+            	   </div>
+
+            	</div>
+
+                <div class="alert alert-danger mt-1"
+                        *ngIf="myForm.controls['password'].invalid && myForm.controls['password'].touched">
+                        <div *ngIf="myForm.controls['password'].hasError('required')">this is a required field</div>
+                        <div *ngIf="myForm.controls['password'].hasError('minlength')">minlength 8</div>
+                    </div>
+
+                <a href="#">Forgot Password?</a>
+            	<input type="submit" class="btn" value="Login">
+
+                <p>Don't have an account?</p><a (click)="show()" id="account">Register Here</a>
+            </form>
+
+            <form class ="mx-auto d-flex align-items-start flex-wrap"  #f="ngForm" *ngIf="hide">
+                
+                <div class="">
+                    <div class="form-group ">
+                        <label>First Name</label>
+                        <input type="text" name="firstname" class="form-control" [(ngModel)]="cl.prenom" required minlength="3" pattern="[a-zA-Z]+$" #fn="ngModel" >
+                        <br>
+                        <div class="alert alert-danger" *ngIf ="fn.invalid && fn.touched">
+                            <div *ngIf="fn.hasError('required')">FirstName is a required field</div>
+                            <div *ngIf="fn.hasError('minlength')">FirstName  minlength ies equal to 3</div>
+                            <div *ngIf="fn.hasError('pattern')"> error msg Pattern</div>
+                        </div>
+                        <label>Last Name</label>
+                        <input type="text" name="lastname" class="form-control" [(ngModel)]="cl.nom" required pattern="[a-zA-Z]+$" #ln="ngModel" >
+                        <br>
+                        <div class="alert alert-danger" *ngIf ="ln.invalid && ln.touched">
+                            <div *ngIf="ln.hasError('required')">LastName is a required field</div>
+                            <div *ngIf="ln.hasError('minlength')">LastName minlength ies equal to 3</div>
+                            <div *ngIf="ln.hasError('pattern')"> error msg Pattern</div>
+                        </div>
+                        <div>
+                            <label>Email</label>
+                        <input type="email" name="email" class="form-control"[(ngModel)]="cl.email" required minlength="3" pattern="^[a-zA-Z0-9._-]+@gmail.com" #e="ngModel" >
+                        <br>
+                        <div class="alert alert-danger" *ngIf ="e.invalid && e.touched">
+                            <div *ngIf="e.hasError('required')">Email minlength ies equal to 3</div>
+                            <div *ngIf="e.hasError('pattern')"> error msg Pattern</div>
+                        </div>
+                        </div>
+                        <div>
+                            <label>Password</label>
+                        <input type="password" name="password" class="form-control"[(ngModel)]="cl.password" required minlength="8" pattern="^[a-zA-Z0-9]{8,}?" #p="ngModel" >
+                        <br>
+                        <div class="alert alert-danger" *ngIf ="p.invalid && p.touched">
+                            <div *ngIf="p.hasError('required')">Password is a required field</div>
+                            <div *ngIf="p.hasError('minlength')">Password minlength ies equal to 3</div>
+                            <div *ngIf="p.hasError('pattern')"> error msg Pattern</div>
+                        </div>
+                        </div>
+                </div>
+                    
+                  <div class="">
+                      <div>
+                    <label>Category</label>
+                    <!-- <input type="text" name="categorie" class="form-control"[(ngModel)]="cl.categorieClient"  required>
+                    <br> -->
+            
+                    <select class="form-select mt-1" name="categorie" [(ngModel)]="cl.categorieClient" aria-label="Default select example">
+                        <option value="Premuim">Premuim</option>
+                        <option value="Ordinaire">Ordinaire</option>
+                        <option value="Fidele">Fidele</option>
+                    </select>
+                    <br>
+                </div>
+                <div>
+                    <label>BirthDay</label>
+                    <input type="datepicker" class="form-control" name="birthDate" placeholder="Birth date"
+                    onfocus="(this.type='date')" onblur="(this.type='text')" [(ngModel)]="cl.dateNaissance"
+                    required="required">
+                <br>
+                </div>
+                <div>
+                    <label>Profession</label>
+                <!-- <input type="text" name="profession" class="form-control"[(ngModel)]="cl.profession"  > -->
+            
+                <select class="form-select mt-1" name="profession" [(ngModel)]="cl.profession" aria-label="Default select example">
+                    <option value="Doctor">Docteur</option>
+                    <option value="Ingénieur">Ingénieur</option>
+                    <option value="Etudiant">Etudiant</option>
+                    <option value="Commercial">Commercial</option>
+                    <option value="Cadre">Cadre</option>
+                    <option value="Autre">Autre</option>
+                </select>
+                <br>
+                </div>
+            
+                </div>
+                <button class="btn btn-outline-success" (click)="postUser(f)"[disabled]="f.invalid">Save</button>
+                &nbsp;
+                <button class="btn btn-outline-warning" (click)="f.reset()" >Reset</button> <a class="mx-3" style="color: black" routerLink="/login">Already have an account?</a>
+            
+                  </div>
+            </form>
+
+        </div>
+    </div>
+    <script type="text/javascript" src="js/main.js"></script>
+</body>
+    
