@@ -1,0 +1,192 @@
+<form>
+  <div class="form-group d-flex justify-content-center">
+    <label for="code mx-1">libelle:</label>
+    <input type="search" class="form-control recherche mx-2" width="80px" id="libelle"  placeholder="Entrer libelle"
+    [(ngModel)]="fsearch.libelle" name="libelle">
+    <label for="code">Code :</label>
+    <input type="search" class="form-control recherche mx-2" width="80px" id="code"  placeholder="Entrer code"
+    [(ngModel)]="fsearch.code" name="code">
+    <button  class="btn btn-primary mx-1" (click)="chercher()">Chercher</button>
+  </div>
+  
+</form>
+<table class="table user-list">
+    <thead>
+        <tr>
+            <th><span>idFournisseur</span></th>
+            <th><span>Libelle</span></th>
+            <th><span>Code</span></th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        
+            <tr *ngFor = "let f of fournisseurs" #pr>
+                <td>
+                    {{ f.idFournisseur }}
+                </td>
+                <td>
+                  {{ f.libelle }}
+              </td>
+                <td>
+                  {{ f.code }}
+              </td>
+                
+                
+                <td>
+                  <!-- updateFournisseur-->
+                  <button type="button" data-bs-toggle="modal" 
+                  data-bs-target="#update" class="btn btn-primary mx-3"><svg
+                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-pencil-square" viewBox="0 0 16 16" (click)=selectFournisseur(f)>
+                    <path
+                      d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                    <path fill-rule="evenodd"
+                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                  </svg>
+                 </button>
+                    <!-- deleteFournisseur -->
+                  <button class="btn btn-danger" 
+                    data-bs-toggle="modal"
+                    data-bs-target="#supprimer" (click)="selectId(f.idFournisseur)"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                      fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                      <path
+                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                      <path fill-rule="evenodd"
+                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                    </svg>
+                  </button>
+                </td>
+                
+            </tr>
+    </tbody>   
+</table>
+<!-- supprimier -->
+<div class="modal fade" id="supprimer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Supprimer Fournisseur</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Êtes-vous sûr de vouloir supprimer ce fournisseur {{four.idFournisseur}}?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="comfirmeDelete()">Oui</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- update  -->
+<div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Modifier</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form #formFournisseur="ngForm">
+      <div class="modal-body mx-3 ">
+        <!-- libelle -->
+        <div class="md-form mb-4 d-flex justify-content-center">
+          <label data-error="wrong" data-success="right" for="code">id:  {{four.idFournisseur}}</label>
+          
+        </div>
+       <div class="md-form mb-4">
+          <label data-error="wrong" data-success="right" for="libelle">libelle:</label>
+          <input  required name="libelleFournisseur" type="text" id="libelle" class="form-control validate" 
+          [(ngModel)]="four.libelle" #libelleFournisseur="ngModel" minlength="3" > 
+          <div class="alert alert-danger " *ngIf="libelleFournisseur.hasError('required') && libelleFournisseur.touched">
+            ce champ est oblegatoire</div> 
+            <div class="alert alert-danger " 
+          *ngIf="libelleFournisseur.hasError('minlength') && libelleFournisseur.dirty">
+          le code doit contenir au minmum 3 caracteres</div>
+        </div>
+        <!-- code -->
+        <div class="md-form mb-4">
+          <label data-error="wrong" data-success="right" for="code">code:</label>
+          <input type="text" id="code" class="form-control validate" 
+          [(ngModel)]="four.code" required pattern="^([a-zA-Z-0-9]+)$"
+          #codeFournisseur="ngModel" name="codeFournisseur">  
+          <div class="alert alert-danger " 
+          *ngIf="codeFournisseur.hasError('required') && codeFournisseur.touched">
+          ce champ est oblegatoire
+        </div> 
+          <div class="alert alert-danger " 
+          *ngIf="codeFournisseur.hasError('pattern') && codeFournisseur.dirty">
+          le code doit contenir que des caracteres et chiffres</div> 
+          <div class="alert alert-danger " 
+          *ngIf="four.code.length != 8 && codeFournisseur.dirty">
+          le code doit contenir 8 caracteres</div>
+        </div>
+      
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button class="btn btn-default" (click)="updateFournisseur(four)" 
+        data-bs-dismiss="modal" [disabled]="formFournisseur.invalid || four.code.length !=8"
+        >confirme</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+<!-- add Fournisseur -->
+<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Ajouter</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="form">
+      <div class="modal-body mx-3 ">
+        
+          <div class="md-form mb-4">
+            <!-- libelle -->
+            <label data-error="wrong" data-success="right" for="libelle">libelle:</label>
+            <input type="text" id="libelle" class="form-control validate" formControlName="libelle">
+            <div class="alert alert-danger " *ngIf="libelle.hasError('required') && libelle.touched">ce champ est oblegatoire</div> 
+            <div class="alert alert-danger " 
+            *ngIf="libelle.hasError('minlength') && libelle.dirty">
+            le code doit contenir au minmum 3 caracteres</div>
+          </div>
+          <div class="md-form mb-4">
+            <!-- code -->
+            <label data-error="wrong" data-success="right" for="code">code:</label>
+            <input type="text" id="code" class="form-control validate" formControlName="code"> 
+            <div class="alert alert-danger " *ngIf="code.hasError('required') && code.touched">ce champ est oblegatoire</div> 
+            <div class="alert alert-danger " 
+          *ngIf="code.hasError('pattern') && code.dirty">
+          le code doit contenir que des caracteres et chiffres</div> 
+          <div class="alert alert-danger " 
+          *ngIf="code.value.length != 8 && code.dirty">
+          le code doit contenir 8 caracteres</div>
+          </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <button class="btn btn-default" 
+            data-bs-dismiss="modal" [disabled]="form.invalid || code.value.length!=8" (click)="addFournisseur()">ajouter</button>
+          </div>
+        </form>
+       
+     
+    </div>
+  </div>
+</div>
+<button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add" > add</button>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,23 @@
+{{p}}
+<!-- <button (click)="navigate()">Show</button> -->
+
+<button (click)="navigate()" class="btn btn-outline-dark" routerLink="/facture">
+       
+    <i style="font-size: 25px;" class="fas fa-cart-plus"></i>
+    <div style="font-size: 10px;" class="badge bg-danger">{{count1}}</div>
+  </button>
+
+<div class="container">
+    <div class="row">
+        <ng-container *ngFor = "let p of productList">
+            <div class="card col-md-3">
+                <img src="" alt="">
+                <h5 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100ch;">{{p.code}}</h5>
+                <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100ch;">{{p.libelle}}</p>
+                <p><strong>Price:</strong>{{p.prixUnitaire}}$</p>
+                <button class="btn btn-info" (click)="add(p)">Add to Cart</button>
+            </div>
+        </ng-container>
+    </div>
+    
+</div>

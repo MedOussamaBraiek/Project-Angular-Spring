@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Client } from '../models/client';
+import { facture } from '../models/facture';
 import { Login } from '../models/login';
 import { User } from '../models/users';
+import { ClientsService } from '../services/clients.service';
+import { InvoicesService } from '../services/invoices.service';
 import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-list-user',
   templateUrl: './list-user.component.html',
   styleUrls: ['./list-user.component.css'],
-  providers: [UserService]
+  providers: [UserService, ClientsService]
 })
 export class ListUserComponent implements OnInit {
 
@@ -20,9 +24,14 @@ export class ListUserComponent implements OnInit {
   list: User[];
   listIn: User[];
 
+  list1: Client[];
+  listIn1: Client[];
+
+  listFactures: facture[];
+
   showUpdate= true;
 
-  constructor(private ac:ActivatedRoute, private us:UserService) { }
+  constructor(private ac:ActivatedRoute, private us:UserService, private cs: ClientsService, private inv: InvoicesService) { }
 
   show=true;
   showAdd=false;
@@ -33,14 +42,20 @@ export class ListUserComponent implements OnInit {
 
   userForm: FormGroup;
 
-  clientObg: User = new User();
+  clientObg: Client = new Client();
 
   confirmation = false;
-  u: User;
+  clientDeleted: number;
+
+  listCopy:Client[];
+  listClient:Client[];
+  search="";
 
   ngOnInit(): void {  //declancher automatiquement apres le constructeur
     
-    this.getAllClients();
+    //this.getAllClients();
+
+    this.getClientBySpring();
 
     this.userForm = new FormGroup({
       IdCustomer: new FormControl(''),
@@ -50,7 +65,7 @@ export class ListUserComponent implements OnInit {
       email : new FormControl('', [Validators.required,Validators.pattern("^[a-zA-Z0-9._-]+@gmail.com")]),
       password : new FormControl('', [Validators.required, Validators.pattern("^[a-zA-Z0-9]{8,}?")]),
       profession: new FormControl('',[Validators.required]),
-      accountCategory: new FormControl('Customer')
+      categorie: new FormControl('')
     })
     
   };
@@ -70,19 +85,89 @@ export class ListUserComponent implements OnInit {
   //   );
   // }
 
-  getAllClients(){
-    this.us.getAllUserFromDb().subscribe(res =>{
-      this.list=res;
-      this.listIn = this.list;
+  getClientBySpring() {
+    this.cs.getAllClient().subscribe(res => {
+      this.list1=res;
+      this.listIn1 = this.list1;
 
       this.ac.paramMap.subscribe(res => {
         //console.log(res.get('cat')),
-        this.list = this.listIn.filter((user)=>{
-          return user.accountCategory == res.get('category');
+        this.list1 = this.listIn1.filter((user)=>{
+          return user.categorieClient == res.get('category');
         })
+        
       })
-    } )
+    })
   }
+
+  getClient(){
+    this.cs.getAllClient().subscribe((res)=>{
+    this.list1=res
+  
+    this.listIn1=this.list1;
+    this.list1=this.listIn1.filter((client)=>
+     {return client.nom.includes(this.search)});
+     
+    })
+   }
+
+
+
+  deleteClient(id: number){
+    this.clientDeleted = id;
+      if(this.confirmation){
+        this.cs.deleteClient(id)
+        .subscribe(res=>{
+          this.getClientBySpring();
+         })
+       } 
+  }
+
+  oui(){
+    this.confirmation = true;
+    this.deleteClient(this.clientDeleted);
+  }
+
+
+  updateClient(client: Client, id:number){
+    this.clientObg.idClient = client.idClient;
+  
+     this.userForm.controls['IdCustomer'].setValue(client.idClient);
+     this.userForm.controls['firstName'].setValue(client.prenom);
+     this.userForm.controls['lastName'].setValue(client.nom);
+     this.userForm.controls['email'].setValue(client.email);
+     this.userForm.controls['password'].setValue(client.password);
+     this.userForm.controls['birthDate'].setValue(client.dateNaissance);
+     this.userForm.controls['profession'].setValue(client.profession);
+     //this.userForm.controls['categorie'].setValue(client.categorieClient);
+   }
+  
+  
+   update() {
+    this.clientObg.prenom = this.userForm.value.firstName;
+    this.clientObg.nom = this.userForm.value.lastName;
+    this.clientObg.email = this.userForm.value.email;
+    this.clientObg.categorieClient = this.userForm.value.categorie;
+    this.clientObg.password = this.userForm.value.password;
+    this.clientObg.dateNaissance = this.userForm.value.birthDate;
+    this.clientObg.profession = this.userForm.value.profession;
+  
+    this.cs.updateClient(this.clientObg)
+    .subscribe(()=> {
+    alert("Client edited");
+       this.getClientBySpring();
+    })
+    //this.showUpdate = false;
+   }
+
+
+   getFactures(client: Client){
+      this.inv.getByClient(client.idClient)
+      .subscribe(res => {
+        //console.log(res);
+        this.listFactures = res;
+      })
+   }
 
 
   getUserCategory(c:string){
@@ -93,68 +178,10 @@ export class ListUserComponent implements OnInit {
     }
  }
 
- deleteUser(user: User){
-   this.u = user;
-   if(this.confirmation){
-    this.us.deleteClient(user.id)
-    .subscribe(res=>{
-      this.getAllClients();
-     })
-   } 
- }
-
- oui(){
-  this.confirmation = true;
-  this.deleteUser(this.u);
-}
-
-
- updateClient(user: User, id:number){
-  this.clientObg.id = user.id;
-  this.clientObg.picture = user.picture;
-  this.clientObg.accountCategory = user.accountCategory;
-
-   this.userForm.controls['IdCustomer'].setValue(user.id);
-   this.userForm.controls['firstName'].setValue(user.firstName);
-   this.userForm.controls['lastName'].setValue(user.lastName);
-   this.userForm.controls['email'].setValue(user.email);
-   this.userForm.controls['password'].setValue(user.password);
-   this.userForm.controls['birthDate'].setValue(user.birthDate);
-   this.userForm.controls['profession'].setValue(user.profession);
- }
-
-
- update() {
-  this.clientObg.firstName = this.userForm.value.firstName;
-  this.clientObg.lastName = this.userForm.value.lastName;
-  this.clientObg.email = this.userForm.value.email;
-  this.clientObg.password = this.userForm.value.password;
-  this.clientObg.birthDate = this.userForm.value.birthDate;
-  this.clientObg.profession = this.userForm.value.profession;
-
-  this.us.updateClient(this.clientObg, this.clientObg.id)
-  .subscribe(()=> {
-  alert("Client edited");
-     this.getAllClients();
-  })
-  //this.showUpdate = false;
- }
-
-
-//  updateClient(user: User){
-//    console.log(user)
-//   this.us.list[this.us.list.indexOf(user)].firstName = user.firstName;
-
-//   this.us.updateClient(user, user.id)
-//   .subscribe(res => {
-//     alert("Update successfully");
-//   })
-//  }
 
  changeValue(x:string){
    this.prop2=x;
  }
-
 
 
 showForm(){

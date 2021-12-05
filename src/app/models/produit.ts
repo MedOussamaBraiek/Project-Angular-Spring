@@ -8,8 +8,10 @@ export class produit{
   code : string ;
   libelle :string ;
   prixUnitaire :number ;
+  remise?:number;
+  quantite?:number;
   rayon : rayon ;
   stock : stock ;
-  detailProduit : detailProduit ;
+  detailProduit ?: detailProduit ;
   fournisseurs : fournisseur[];
 }

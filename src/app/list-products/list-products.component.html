@@ -1,3 +1,13 @@
+
+
+<div class="form-group col-md-4 mb-3">
+  <label for="date" class="form-label "><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+  </svg> Libelle:</label>
+  <input [(ngModel)]="search" class="form-control" (keyup)="getproducts()">
+</div>
+   
+
 <table class="table user-list">
     <thead>
         <tr>
@@ -5,14 +15,20 @@
             <th><span>Code</span></th>
             <th><span>Libelle</span></th>
             <th><span>Prix unitaire</span></th>
-            <th><span>Taux Tva</span></th>
+            <th><span>dateCreation</span></th>
+            <th><span>dateDereniereModif</span></th>
+            <th><span>Categorie</span></th>
+            <th><span>idRayon</span></th>
+            <th><span>idStock</span></th>
+            <th><span>RB</span></th>
         </tr>
     </thead>
     <tbody>
-        
-            <tr *ngFor = "let p of ListProduct; let i = index;" #pr>
+         
+            <tr *ngFor = "let p of Listproduit; let i = index;  " #pr>
+              
                 <td>
-                    {{ p.id }}
+                    {{ p.idProduit }}
                 </td>
                 <td>
                     {{ p.code }}
@@ -22,24 +38,27 @@
                 </td>
 
                 <td>
-                    {{ p.prixunitaire }}
+                    {{ p.prixUnitaire }}
                 </td>
                 <td>
-                    {{ p.tauxTva }}
-                </td>
-                <!-- <td>
-                    <button class="btn btn-warning" (click)="updateProduct(p, p.id)" data-bs-toggle="modal"
-                    data-bs-target="#editProduct">Modifier</button>
+                  {{ p.detailProduit.dateCreation }}
+              </td>
+              <td>
+                {{p.detailProduit.dateDerniereModification}}
+            </td>
+                <td>
+                    {{ p.detailProduit.categorieProduit }}
                 </td>
                 <td>
-                    <button class="btn btn-danger" (click)="deleteProductt(p)" data-bs-toggle="modal" 
-                    data-bs-target="#supprimer">Supprimer</button>
-                    
-                </td> -->
-
+                  {{ p.rayon.idRayon }}
+              </td>
+              <td>
+                {{ p.stock.idStock }}
+                       <td ><button class="btn btn-success" (click)="getrevenuebrut(p.idProduit,p.detailProduit.dateCreation)">R.B</button>   </td> 
+            <td></td>
                 <td>
-                  <!-- updateClient -->
-                  <button type="button" data-bs-toggle="modal" (click)="updateProduct(p, p.id)"
+                   
+                  <button type="button" data-bs-toggle="modal" (click)="updateproduit(p, p.idProduit)"
                   data-bs-target="#editProduct" class="btn btn-primary mx-3"><svg
                     xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -48,8 +67,9 @@
                     <path fill-rule="evenodd"
                       d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                   </svg></button>
-                    <!-- deleteClient -->
-                  <button class="btn btn-danger" (click)="deleteProductt(p)"
+                  <td>
+                      
+                  <button class="btn btn-danger" (click)="deleteProduit(p)"
                     data-bs-toggle="modal"
                     data-bs-target="#supprimer"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                       fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -61,26 +81,31 @@
                 </td>
                 
             </tr>
+          
+          
     </tbody>
 </table>
 
-<div class="container d-flex justify-content-arround">
-  <label for="libelle" class="mx-2">Count by libelle:</label>
-  <input type="text" class="form-control w-25 my-2" placeholder="Libelle"#s>
-  <button (click)="countByLibelle(s.value, ListProduct)" class="btn btn-info mx-3 l-3">Count</button>
-  <input type="text" class="form-control w-25 my-2" value="{{count}}" readonly>
+<div class="container d-flex justify-content-center ">
+  <label for="libelle" class=" my-2 "> Count by libelle:</label>
+  <input type="text" class="form-control w-25 my-2 offset-md-1" placeholder="Libelle"#s>
+  <button (click)="countByLibelle(s.value)" class="btn btn-info mx-3 l-3">Count</button>
+  <input type="text" class="form-control w-25 my-2 " value="{{c}}" readonly>
+
 </div>
 
-
-<button (click)="show()" class="btn btn-success mt-3" data-bs-toggle="modal"
+<div class="container d-flex justify-content-center">
+<button (click)="show()" class="btn btn-success mt-3 w-50 " data-bs-toggle="modal"
 data-bs-target="#addProduct">Add product</button>
+</div>
+
 
 
 <!-- <app-form-products *ngIf=isShowing (added)="addProductt($event)"></app-form-products> -->
 
 
 
-<!--modal Modifier-->
+
 <div class="modal fade" id="editProduct" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -108,11 +133,27 @@ data-bs-target="#addProduct">Add product</button>
 					  </div>
 					  <div class="mb-3">
 						<label for="prix" class="form-label">Prix unitaire</label>
-						<input type="text" class="form-control" id="prix" formControlName="prixunitaire">
+						<input type="text" class="form-control" id="prix" formControlName="prixUnitaire">
 					  </div>
-					  <div class="mb-3">
-						<label for="taux" class="form-label">Taux TVA</label>
-						<input type="text" class="form-control" id="taux" formControlName="tauxTva">
+					  
+            <div class="mb-3">
+              <label for="categorieProduit" class="form-label">categorieProduit </label>
+              <!--	<input type="text" class="form-control" id="categorieProduit" formControlName="categorieProduit">-->
+                <select class="form-select" aria-label="Default select example"formControlName="categorieProduit">
+                 <option value="Alimentaire" selected>Alimentaire</option>
+                  
+                  <option value="Quicaillerie">Quicaillerie</option>
+                  <option value="Electromenager">Electromenager</option>
+                </select>
+					  </div>
+            <div class="mb-3">
+						<label for="idRayon" class="form-label">idRayon</label>
+						<input type="text" class="form-control" id="idRayon" formControlName="idRayon">
+		
+					  </div>
+            <div class="mb-3">
+						<label for="idStock" class="form-label">idStock</label>
+						<input type="text" class="form-control" id="idStock" formControlName="idStock">
 		
 					  </div>
 		
@@ -120,7 +161,7 @@ data-bs-target="#addProduct">Add product</button>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-				<button type="button" class="btn btn-primary" (click)="update()">Modifier</button>
+				<button type="button" class="btn btn-primary" (click)="update1()">Modifier</button>
 			</div>
 		</div>
 	</div>
@@ -128,7 +169,7 @@ data-bs-target="#addProduct">Add product</button>
 
 
   
-  <!-- Modal Supprimer -->
+   <!--Modal Supprimer--> 
   <div class="modal fade" id="supprimer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -172,20 +213,38 @@ data-bs-target="#addProduct">Add product</button>
 					  </div>
 					  <div class="mb-3">
 						<label for="prix1" class="form-label">Prix unitaire</label>
-						<input type="text" class="form-control" id="prix1" formControlName="prixunitaire">
+						<input type="text" class="form-control" id="prix1" formControlName="prixUnitaire">
 					  </div>
-					  <div class="mb-3">
-						<label for="taux1" class="form-label">Taux TVA</label>
-						<input type="text" class="form-control" id="taux1" formControlName="tauxTva">
+					   
+		
+					  
+            <div class="mb-3">
+						<label for="categorieProduit" class="form-label">categorieProduit </label>
+					<!--	<input type="text" class="form-control" id="categorieProduit" formControlName="categorieProduit">-->
+            <select class="form-select" aria-label="Default select example"formControlName="categorieProduit">
+             <option value="Alimentaire" selected>Alimentaire</option>
+              
+              <option value="Quicaillerie">Quicaillerie</option>
+              <option value="Electromenager">Electromenager</option>
+            </select>
+					  </div>
+            <div class="mb-3">
+						<label for="idRayon" class="form-label">idRayon</label>
+						<input type="text" class="form-control" id="idRayon" formControlName="idRayon">
 		
 					  </div>
+            <div class="mb-3">
+						<label for="idStock" class="form-label">idStock</label>
+						<input type="text" class="form-control" id="idStock" formControlName="idStock">
 		
+					  </div>
 				  </form>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-				<button type="button" class="btn btn-primary" (click)="addProductt()">Ajouter</button>
+				<button type="button" class="btn btn-primary" (click)="addproduit()">Ajouter</button>
 			</div>
 		</div>
 	</div>
-</div>
+ 
+

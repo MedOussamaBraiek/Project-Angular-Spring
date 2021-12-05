@@ -43,15 +43,14 @@
       "profession": "Software Engineer"
     },
     {
-      "id": 4,
-      "firstName": "Ryan",
-      "lastName": "Gossling",
-      "birthDate": "1999-06-30",
-      "accountCategory": "Golden",
-      "email": "Ryan@nicholson.com",
+      "idClient": 4,
+      "prenom": "mohamed",
+      "nom": "braiek",
+      "email": "mohamed@gmail.com",
       "password": "test",
-      "picture": "https://bootdey.com/img/Content/avatar/avatar4.png",
-      "profession": "Software Engineer"
+      "dateNaissance": "2012-12-12",
+      "profession": "Etudiant",
+      "id": 4
     },
     {
       "id": 5,

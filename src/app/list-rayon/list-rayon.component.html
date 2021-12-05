@@ -1,0 +1,76 @@
+<table class="table user-list">
+    <thead>
+      <tr>
+        <th><span>Code</span></th>
+  
+        <th><span>Label</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let s of listRayon; let i = index">
+        <td>
+          {{ s.code }}
+        </td>
+        <td>
+          {{ s.libelle }}
+        </td>
+        <td>
+          <a class="btn btn-info" [routerLink]="['/rayon', s.idRayon]">details</a>
+        </td>
+        <td>
+          <button class="btn btn-danger" (click)="deleteRayon(s)">delete</button>
+        </td>
+        <td>
+          <button class="btn btn-secondary" (click)="updateRayon(s)">
+            update
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <button class="btn btn-success" (click)="showForm()">Ajouter</button>
+  <button class="btn btn-danger" *ngIf="showAddRayon" (click)="closeForm()">
+    Cancel
+  </button>
+  
+  <form [formGroup]="addRayonForm" *ngIf="showAddRayon">
+    <div class="form-group col-md-4 mb-3">
+      <label class="form-label">Code</label>
+      <input type="number" class="form-control" formControlName="code" />
+    </div>
+  
+    <div class="form-group col-md-4 mb-3">
+      <label class="form-label">Libelle</label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="Stock Label"
+        formControlName="libelle"
+      />
+    </div>
+    <button class="btn btn-success" (click)="addRayon()">Add</button>
+  </form>
+  
+  <form [formGroup]="updateRayonForm" *ngIf="showUpdateRayon">
+    <div class="form-group col-md-4 mb-3">
+      <label for="first" class="form-label">id</label>
+      <input
+        readonly
+        type="number"
+        class="form-control"
+        formControlName="idStock"
+      />
+    </div>
+    <div class="form-group col-md-4 mb-3">
+      <label for="first" class="form-label">Code</label>
+      <input type="number" class="form-control" formControlName="code" />
+    </div>
+    <div class="form-group col-md-4 mb-3">
+      <label class="form-label">Libelle</label>
+      <input type="number" class="form-control" formControlName="libelle" />
+    </div>
+  
+    <button class="btn btn-success" (click)="update()">Update</button>
+  </form>
+  

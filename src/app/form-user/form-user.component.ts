@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Form, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { User } from '../models/users';
 
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
+import { ClientsService } from '../services/clients.service';
+import { Client } from '../models/client';
 
 @Component({
   selector: 'app-form-user',
@@ -18,10 +20,14 @@ export class FormUserComponent implements OnInit {
 
   user: User;
   client: User;
+
+  client1: Client;
   
   usrObj: User = new User();
 
-  constructor(private data: UserService, private router: Router,private formBuilder: FormBuilder) { }
+  cl: Client = new Client();
+
+  constructor(private data: UserService, private router: Router,private formBuilder: FormBuilder, private cs: ClientsService) { }
 
   ngOnInit(): void {
     this.user = new User();
@@ -31,28 +37,17 @@ export class FormUserComponent implements OnInit {
 
   postUser(form: NgForm){
 
-    this.client = {
-      id: form.value.id,
-      firstName: form.value.firstname,
-      lastName: form.value.lastname,
-      birthDate: form.value.birthDate,
-      email: form.value.email,
-      password: form.value.password,
-      profession: form.value.profession,
-      accountCategory: form.value.accountCategory,
-      picture: form.value.picture
-    }
-    //this.client.idCustomer = 7;
-    let rund = Math.floor(Math.random() * (4 - 1)) + 1;
-    this.client.picture = "https://bootdey.com/img/Content/avatar/avatar"+rund+".png";
-    this.client.accountCategory = 'Customer';
-    console.log(this.client);
 
-    this.data.addClient(this.client)
+    this.cs.addClient(this.cl)
     .subscribe(res=>{
       console.log(res);
       alert("Client added successfully");
-      this.router.navigateByUrl('/user/listuser/Customer');
+      if(this.cl.categorieClient == "Premuim")
+        this.router.navigateByUrl('/user/listuser/Premuim');
+      else if(this.cl.categorieClient == "Ordinaire")
+        this.router.navigateByUrl('/user/listuser/Ordinaire');
+      else if(this.cl.categorieClient == "Fidele")
+        this.router.navigateByUrl('/user/listuser/Fidele');
     }),
     err => 
       alert("Something went wrong");
