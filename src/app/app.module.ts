@@ -34,6 +34,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { AdminComponent } from './admin/admin.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GoogleMapsComponent } from './google-maps/google-maps.component';
+import { SideBarComponent } from './side-bar/side-bar.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { GoogleMapsComponent } from './google-maps/google-maps.component';
     ListFournisseurComponent,
     WelcomeComponent,
     AdminComponent,
-    GoogleMapsComponent
+    GoogleMapsComponent,
+    SideBarComponent
   ],
   imports: [
     BrowserModule,

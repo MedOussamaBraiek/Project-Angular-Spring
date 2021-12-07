@@ -1,20 +1,24 @@
-img{
-    width: 10%;
+img {
+  width: 10%;
+}
+
+.navbar {
+  width: 100% !important ;
 }
 
 .dropdown-menu {
-    display: none;
+  display: none;
 }
 
-.dropdown:hover .dropdown-menu{
-    display:block;
+.dropdown:hover .dropdown-menu {
+  display: block;
 }
 
 .nav {
-    display: flex;
+  display: flex;
 }
 
-.btn-danger{
-    display: flex;
-    justify-content: flex-end;
+.btn-danger {
+  display: flex;
+  justify-content: flex-end;
 }
