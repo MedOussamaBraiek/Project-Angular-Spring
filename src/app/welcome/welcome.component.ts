@@ -24,26 +24,30 @@ export class WelcomeComponent implements OnInit {
   constructor(private f: FormBuilder,private cs: ClientsService, private router: Router) { }
 
   ngOnInit(): void {
-
+this.getAll()
     this.myForm = this.f.group({
       email: ['', [Validators.required, Validators.pattern('[a-zA-Z]*@gmail.com')]],
       password: ['', [Validators.required, Validators.minLength(8)]]
     })
   }
-
+  getAll(){
+    this.cs.getAllClient().subscribe(res => {
+      console.log(res);
+    })
+  }
 
   login(myForm: FormGroup) {
     this.cs.getAllClient().subscribe(res => {
       this.clients = res;
-      
+
       this.clients.forEach(client =>
         {
           if (client.email === myForm.controls['email'].value &&
             client.password === myForm.controls['password'].value) {
-    
+
             //this.text1 = "Welcome";
             //this.text2 = client.prenom + " " +client.nom;
-            
+
             if(client.categorieClient === 'Admin') {
               alert('Welcome Boss');
               this.find=true;
@@ -55,18 +59,18 @@ export class WelcomeComponent implements OnInit {
               this.find=true;
               this.send();
               this.myForm.reset();
-    
+
               this.ClientConnecte = client.idClient;
               this.router.navigate(['/shop/'+this.ClientConnecte]);
             }
           }
-  
+
         })
           if(this.find == false) {
             alert('please give a valid account')
             //this.text1 = 'please give a valid account'
           }
-  
+
 
     });
 }
@@ -88,9 +92,9 @@ postUser(form: NgForm){
     //   this.router.navigateByUrl('/admin/user/listuser/Fidele');
     this.router.navigateByUrl('/welcome');
   }),
-  err => 
+  err =>
     alert("Something went wrong");
-  
+
 }
 
 show(){

@@ -18,11 +18,12 @@ import { ShopComponent } from './shop/shop.component';
 import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
+
+  {path: "" ,redirectTo: "welcome", pathMatch: "full"},
   {path: "home", component:HomeComponent},
-  {path: "" ,redirectTo: "home", pathMatch: "full"},
   {path: "form/:id", component: AddFormComponent},
-  
-  
+
+
   {path: "shop/:ClientConnecte", component: ShopComponent},
   {path: "facture/:ClientConnecte", component: DetailFactureComponent},
   {path: "welcome", component: WelcomeComponent},
@@ -39,8 +40,8 @@ const routes: Routes = [
       {path:"listuser/:category", component:ListUserComponent}
     ]},
   ]},
-  
-  
+
+
   {path:'subscribe',component :FormUserComponent},
   {path: "login", component: LoginUserComponent},
   {path: "invoice", component: ListInvoiceComponent},

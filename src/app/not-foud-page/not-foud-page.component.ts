@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './not-foud-page.component.html',
   styleUrls: ['./not-foud-page.component.css']
 })
+
 export class NotFoudPageComponent implements OnInit {
 
   constructor() { }

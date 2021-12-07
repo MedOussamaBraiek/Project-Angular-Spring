@@ -29,7 +29,7 @@ export class StockDetailComponent implements OnInit {
     )
   }
   goBack(){
-    this.router.navigateByUrl('/stocks')
+    this.router.navigateByUrl('/admin/stocks')
   }
 }
 
