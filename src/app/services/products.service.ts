@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { fournisseur } from '../models/fournisseur';
 
 import { Product } from '../models/product';
 import { produit } from '../models/produit';
@@ -64,5 +65,8 @@ export class ProductsService {
 
   assignfournisseurtoproduit(idfournisseur:number,idProduit:number){
     return this.http.put<produit>(this.url1+`/${idfournisseur}`+'/assign'+`/${idProduit}`,this.httpOptions);
+    }
+    getlistfournisseurbyproduit(idproduit:number){
+return this.http.get<fournisseur[]>(this.url1+`/get-fourni-p/${ idproduit}`);
     }
 }

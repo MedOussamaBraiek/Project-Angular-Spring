@@ -19,7 +19,7 @@ import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   {path: "home", component:HomeComponent},
-  {path: "" ,redirectTo: "home", pathMatch: "full"},
+  {path: "" ,redirectTo: "welcome", pathMatch: "full"},
   {path: "form/:id", component: AddFormComponent},
   
   

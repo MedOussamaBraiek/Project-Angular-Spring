@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { detailProduit } from '../models/detailProduit';
+import { fournisseur } from '../models/fournisseur';
 
 import { Product } from '../models/product';
+import { ProductImage } from '../models/ProductImage';
 import { produit } from '../models/produit';
 import { rayon } from '../models/rayon';
 import { stock } from '../models/stock';
@@ -22,14 +25,29 @@ export class ListProductsComponent implements OnInit {
   ListProduct:Product[];
   Listproduit2:produit[];
   Listcopy:produit[];
+  p7:produit;
+  revenebrut1:number;
   count: number;
   iss:boolean=false;
   isShowing: boolean = false;
   formProduct: FormGroup;
   formasign:FormGroup;
+  listfourni:fournisseur[];
 listrevenue:number[];  
 revenue1:number;
+revenue6:number =0;
 count1: number = 0;
+p9:produit={
+  idProduit: 0,
+  code: '',
+  libelle: '',
+  prixUnitaire: 0,
+  rayon: new rayon,
+  stock: new stock,
+  detailProduit: new detailProduit,
+  fournisseurs: [],
+  productImage:null
+}
   c:number = 0;
  search="";
  url:string="";
@@ -43,7 +61,8 @@ count1: number = 0;
     rayon: new rayon,
     stock: new stock,
     detailProduit: new detailProduit,
-    fournisseurs: []
+    fournisseurs: [],
+    productImage:null
   }
   p3:produit={
     idProduit: 0,
@@ -53,7 +72,8 @@ count1: number = 0;
     rayon: new rayon,
     stock: new stock,
     detailProduit: new detailProduit,
-    fournisseurs: []
+    fournisseurs: [],
+    productImage:null
   }
    p1:produit={
      idProduit: 0,
@@ -64,7 +84,8 @@ count1: number = 0;
      stock: new stock,
      detailProduit: new detailProduit,
      fournisseurs: [],
-     url: 'https://media.ldlc.com/r1600/ld/products/00/05/88/61/LD0005886177_1.jpg'
+     url: '',
+     productImage:null
    };
    p2:produit={
     idProduit: 0,
@@ -74,7 +95,8 @@ count1: number = 0;
     rayon: new rayon,
     stock: new stock,
     detailProduit: new detailProduit,
-    fournisseurs: []
+    fournisseurs: [],
+    productImage:null
   };
   confirmation = false;
   p: Product;
@@ -83,7 +105,7 @@ count1: number = 0;
 
   pAdd: Product;
 
-  constructor(private productService: ProductServiceService,private produitService:ProductsService, private fs: FournisseursService) { }
+  constructor(private productService: ProductServiceService,private sanitizer: DomSanitizer, private produitService:ProductsService, private fs: FournisseursService) { }
 
   ngOnInit(): void {
     this.getproduit();
@@ -109,7 +131,15 @@ count1: number = 0;
   }
   getproduit(){
    this.produitService.getAllProducts().subscribe((res)=>{
-    this.Listproduit=res; 
+     console.log(res);
+     this.Listproduit=res
+     this.Listproduit.forEach(product => {
+      
+       product.productImage.data= this.ConvertToSrc(product.productImage.data);
+       //this.Listproduit.push(product);
+       
+    });
+    //this.Listproduit=res; 
    })
    //this.produitService.getallRevenueBrutact().subscribe((res)=>{
      //this.listrevenue=res;})
@@ -120,6 +150,12 @@ count1: number = 0;
       
      //this.Listproduit1=res; 
      this.Listcopy=res;
+     this.Listcopy.forEach(product => {
+      
+      product.productImage.data= this.ConvertToSrc(product.productImage.data);
+      //this.Listproduit.push(product);
+      
+   });
      this.Listproduit=this.Listcopy.filter((produit)=>
      {return produit.libelle.includes(this.search)});
     })
@@ -138,6 +174,7 @@ count1: number = 0;
     //this.ListProduct.push(this.productService.getNbProductsByLibelle(lib));
     //products = this.ListProduct;
     this.produitService.getAllProducts().subscribe((res)=>{
+
       this.Listproduit2=res;})
       if(this.count1 == 0){
         for(let i of this.Listproduit2){
@@ -154,6 +191,59 @@ count1: number = 0;
   
     return this.c ;
   }
+
+  b64toBlob = (b64Data, contentType='', sliceSize=512) => {
+    const byteCharacters = atob(b64Data);
+    const byteArrays = [];
+
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+
+    const blob = new Blob(byteArrays, {type: contentType});
+    return blob;
+  }
+  ConvertToSrc(data:any){
+    let b64 = this.b64toBlob(data);
+    let objectURL = URL.createObjectURL(b64)
+    return this.sanitizer.bypassSecurityTrustUrl(objectURL)
+  }
+
+getp(id:number,date:Date){
+ this.produitService.getOneProductById(id).subscribe(res=>{
+
+  this.p9=res;
+ })
+ this.produitService.getRevenueBrutact(id,date).subscribe(res=>{
+  this.revenue6=res;
+})
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   addproduit(){
     
@@ -220,7 +310,12 @@ if(this.confirmation){
     this.confirmation = true;
     this.deleteProduit(this.p2);
   }
+   getfournisseurs(id:number){
+this.produitService.getlistfournisseurbyproduit(id).subscribe(res=>{
+this.listfourni=res;
+})
 
+   }
 
   show(){
     if(this.isShowing==true)
