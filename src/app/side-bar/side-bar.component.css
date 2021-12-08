@@ -86,20 +86,15 @@ body{
   width: 100%;
   margin-left: 200px;
 }
-
-.wrapper .main_content .header{
-  padding: 20px;
-  background: #fff;
-  color: #717171;
-  border-bottom: 1px solid #e0e4e8;
+.logo{
+  display: flex;
+  width: 200px;
+  justify-content: center;
+  align-items: center;
+}
+.logo img{
+  width: 5rem;
+  position: relative;
+  bottom: 1rem;
 }
 
-.wrapper .main_content .info{
-  margin: 20px;
-  color: #717171;
-  line-height: 25px;
-}
-
-.wrapper .main_content .info div{
-  margin-bottom: 20px;
-}
