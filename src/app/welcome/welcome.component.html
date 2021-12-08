@@ -27,10 +27,10 @@
                       <div *ngIf="myForm.controls['email'].hasError('pattern')">Wrong format </div>
 
                   </div>
-                
+
 
            		<div class="input-div pass focus">
-           		   <div class="i"> 
+           		   <div class="i">
            		    	<i class="fas fa-lock"></i>
            		   </div>
            		   <div class="div">
@@ -53,7 +53,7 @@
             </form>
 
             <form class ="mx-auto d-flex align-items-start flex-wrap"  #f="ngForm" *ngIf="hide">
-                
+
                 <div class="">
                     <div class="form-group ">
                         <label>First Name</label>
@@ -92,13 +92,13 @@
                         </div>
                         </div>
                 </div>
-                    
+
                   <div class="">
                       <div>
                     <label>Category</label>
                     <!-- <input type="text" name="categorie" class="form-control"[(ngModel)]="cl.categorieClient"  required>
                     <br> -->
-            
+
                     <select class="form-select mt-1" name="categorie" [(ngModel)]="cl.categorieClient" aria-label="Default select example">
                         <option value="Premuim">Premuim</option>
                         <option value="Ordinaire">Ordinaire</option>
@@ -116,7 +116,7 @@
                 <div>
                     <label>Profession</label>
                 <!-- <input type="text" name="profession" class="form-control"[(ngModel)]="cl.profession"  > -->
-            
+
                 <select class="form-select mt-1" name="profession" [(ngModel)]="cl.profession" aria-label="Default select example">
                     <option value="Doctor">Docteur</option>
                     <option value="Ingénieur">Ingénieur</option>
@@ -127,12 +127,12 @@
                 </select>
                 <br>
                 </div>
-            
+
                 </div>
                 <button class="btn btn-outline-success" (click)="postUser(f)"[disabled]="f.invalid">Save</button>
                 &nbsp;
                 <button class="btn btn-outline-warning" (click)="f.reset()" >Reset</button> <a class="mx-3" style="color: black" routerLink="/login">Already have an account?</a>
-            
+
                   </div>
             </form>
 
@@ -140,4 +140,4 @@
     </div>
     <script type="text/javascript" src="js/main.js"></script>
 </body>
-    
+

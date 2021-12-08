@@ -3,4 +3,6 @@ export class stock {
   qte : number ;
   qteMin :number ;
   libelleStock : string ;
+  categorieStock:string;
+  img?:string;
 }

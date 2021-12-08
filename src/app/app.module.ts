@@ -32,6 +32,9 @@ import { DetailFactureComponent } from './detail-facture/detail-facture.componen
 import { ListFournisseurComponent } from './list-fournisseur/list-fournisseur.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AdminComponent } from './admin/admin.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GoogleMapsComponent } from './google-maps/google-maps.component';
+import { SideBarComponent } from './side-bar/side-bar.component';
 
 @NgModule({
   declarations: [
@@ -60,14 +63,17 @@ import { AdminComponent } from './admin/admin.component';
     DetailFactureComponent,
     ListFournisseurComponent,
     WelcomeComponent,
-    AdminComponent
+    AdminComponent,
+    GoogleMapsComponent,
+    SideBarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
