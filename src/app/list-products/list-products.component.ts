@@ -157,7 +157,7 @@ p9:produit={
       
    });
      this.Listproduit=this.Listcopy.filter((produit)=>
-     {return produit.libelle.includes(this.search)});
+     {return produit.libelle.toUpperCase().includes(this.search.toUpperCase())});
     })
    }
    getrevenuebrut(id:number,date:Date){
