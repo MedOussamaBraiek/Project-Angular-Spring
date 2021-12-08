@@ -1,76 +1,230 @@
+
+<button
+  class="btn btn-success buttonAdd"
+  data-bs-toggle="modal"
+  data-bs-target="#addRayon"
+>
+  Add New Rayon
+  <i class="fas fa-cart-plus"></i>
+</button>
+<br>
 <table class="table user-list">
-    <thead>
-      <tr>
-        <th><span>Code</span></th>
-  
-        <th><span>Label</span></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let s of listRayon; let i = index">
-        <td>
-          {{ s.code }}
-        </td>
-        <td>
-          {{ s.libelle }}
-        </td>
-        <td>
-          <a class="btn btn-info" [routerLink]="['/rayon', s.idRayon]">details</a>
-        </td>
-        <td>
-          <button class="btn btn-danger" (click)="deleteRayon(s)">delete</button>
-        </td>
-        <td>
-          <button class="btn btn-secondary" (click)="updateRayon(s)">
-            update
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  
-  <button class="btn btn-success" (click)="showForm()">Ajouter</button>
-  <button class="btn btn-danger" *ngIf="showAddRayon" (click)="closeForm()">
-    Cancel
-  </button>
-  
-  <form [formGroup]="addRayonForm" *ngIf="showAddRayon">
-    <div class="form-group col-md-4 mb-3">
-      <label class="form-label">Code</label>
-      <input type="number" class="form-control" formControlName="code" />
+  <thead>
+    <tr>
+      <th><span>Code</span></th>
+
+      <th><span>Label</span></th>
+      <th><span></span></th>
+      <th><span></span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let s of listRayon; let i = index">
+      <td>
+        {{ s.code }}
+      </td>
+      <td>
+        {{ s.libelle }}
+      </td>
+      <td>
+        <button class="btn btn-danger" (click)="deleteRayon(s)">
+          <i class="far fa-trash-alt"></i>
+        </button>
+      </td>
+      <td>
+        <button
+          class="btn btn-secondary"
+          data-bs-toggle="modal"
+          data-bs-target="#updateRayon"
+          (click)="updateRayon(s)"
+        >
+          <i class="fas fa-wrench"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<form [formGroup]="updateRayonForm" *ngIf="showUpdateRayon">
+  <div class="form-group col-md-4 mb-3">
+    <label for="first" class="form-label">id</label>
+    <input
+      readonly
+      type="number"
+      class="form-control"
+      formControlName="idStock"
+    />
+  </div>
+  <div class="form-group col-md-4 mb-3">
+    <label for="first" class="form-label">Code</label>
+    <input type="number" class="form-control" formControlName="code" />
+  </div>
+  <div class="form-group col-md-4 mb-3">
+    <label class="form-label">Libelle</label>
+    <input type="number" class="form-control" formControlName="libelle" />
+  </div>
+
+  <button class="btn btn-success" (click)="update()">Update</button>
+</form>
+
+<div
+  class="modal fade"
+  id="addRayon"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add New Rayon</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="id"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addRayonForm">
+          <div class="mb-3">
+            <label for="id" class="form-label">Code</label>
+            <input
+              type="text"
+              class="form-control"
+              id="id"
+              formControlName="code"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="code" class="form-label">Libelle</label>
+            <input
+              type="text"
+              class="form-control"
+              id="code"
+              formControlName="libelle"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Annuler
+        </button>
+        <button type="button" class="btn btn-primary" (click)="addRayon()">
+          Add
+        </button>
+      </div>
     </div>
-  
-    <div class="form-group col-md-4 mb-3">
-      <label class="form-label">Libelle</label>
-      <input
-        class="form-control"
-        type="text"
-        placeholder="Stock Label"
-        formControlName="libelle"
-      />
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="updateRayon"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Rayon</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="id"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="updateRayonForm">
+          <div class="mb-3">
+            <label for="id" class="form-label">id Rayon</label>
+            <input
+              type="text"
+              class="form-control"
+              id="id"
+              formControlName="idRayon"
+              readonly
+            />
+          </div>
+          <div class="mb-3">
+            <label for="id" class="form-label">Code</label>
+            <input
+              type="text"
+              class="form-control"
+              id="id"
+              formControlName="code"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="code" class="form-label">Libelle</label>
+            <input
+              type="text"
+              class="form-control"
+              id="code"
+              formControlName="libelle"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Annuler
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+          (click)="update()"
+        >
+          Save
+        </button>
+      </div>
     </div>
-    <button class="btn btn-success" (click)="addRayon()">Add</button>
-  </form>
-  
-  <form [formGroup]="updateRayonForm" *ngIf="showUpdateRayon">
-    <div class="form-group col-md-4 mb-3">
-      <label for="first" class="form-label">id</label>
-      <input
-        readonly
-        type="number"
-        class="form-control"
-        formControlName="idStock"
-      />
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="detailes"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">List Of Products</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <table class="table user-list table-responsive">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Prix</th>
+              <th>Catégorie</th>
+              <th>Libelle</th>
+              <th>Rayon</th>
+            </tr>
+          </thead>
+
+          <tr></tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Annuler
+        </button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+          Print
+        </button>
+      </div>
     </div>
-    <div class="form-group col-md-4 mb-3">
-      <label for="first" class="form-label">Code</label>
-      <input type="number" class="form-control" formControlName="code" />
-    </div>
-    <div class="form-group col-md-4 mb-3">
-      <label class="form-label">Libelle</label>
-      <input type="number" class="form-control" formControlName="libelle" />
-    </div>
-  
-    <button class="btn btn-success" (click)="update()">Update</button>
-  </form>
-  
+  </div>
+</div>

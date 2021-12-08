@@ -20,19 +20,19 @@ export class ListRayonComponent implements OnInit {
   ngOnInit(): void {
     this.getAllRayon();
     this.addRayonForm = new FormGroup({
-      // idStock:new FormControl(),
       code:new FormControl(''),
       libelle:new FormControl(''),
     })
-  }
-  showForm(){
-    this.showAddRayon = true ;
-  }
 
-  closeForm(){
-    this.showAddRayon = false ;
-  }
+    this.updateRayonForm=new FormGroup({
+      idRayon:new FormControl(),
+      code:new FormControl(''),
+      libelle:new FormControl('')
+    })
 
+
+
+  }
   getAllRayon(){
     this.http.getAllRayon().subscribe(
       (res)=>{
@@ -47,7 +47,6 @@ export class ListRayonComponent implements OnInit {
         console.log(res);
         alert("rayon "+ res.libelle+ " added");
         this.addRayonForm.reset();
-        this.showAddRayon=false;
         this.getAllRayon();
 
       }
@@ -65,11 +64,10 @@ export class ListRayonComponent implements OnInit {
   }
 
   updateRayon(s:rayon){
-    this.showUpdateRayon=true ;
-    this.updateRayonForm=new FormGroup({
-      idStock:new FormControl(s.idRayon),
-      qte:new FormControl(s.code),
-      qteMin:new FormControl(s.libelle),
+    this.updateRayonForm.patchValue({
+      idRayon:s.idRayon,
+      code:s.code,
+      libelle:s.libelle
 
     })
   }

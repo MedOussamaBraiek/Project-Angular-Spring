@@ -1,0 +1,18 @@
+
+.buttonAdd {
+  display: block;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.buttonAdd:hover {
+  color: #00770a;
+  outline: #00770a;
+  background-color: transparent;
+}
