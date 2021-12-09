@@ -30,6 +30,11 @@ import { ShopComponent } from './shop/shop.component';
 import { DetailFactureComponent } from './detail-facture/detail-facture.component';
 
 import { ListFournisseurComponent } from './list-fournisseur/list-fournisseur.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { AdminComponent } from './admin/admin.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GoogleMapsComponent } from './google-maps/google-maps.component';
+import { SideBarComponent } from './side-bar/side-bar.component';
 
 @NgModule({
   declarations: [
@@ -56,14 +61,19 @@ import { ListFournisseurComponent } from './list-fournisseur/list-fournisseur.co
     FormProductsComponent,
     ShopComponent,
     DetailFactureComponent,
-    ListFournisseurComponent
+    ListFournisseurComponent,
+    WelcomeComponent,
+    AdminComponent,
+    GoogleMapsComponent,
+    SideBarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

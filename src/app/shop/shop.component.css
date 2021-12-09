@@ -15,3 +15,8 @@
     padding: 20px;
     margin: 50px;
 }
+
+.btn-outline-dark{
+    display: flex;
+    justify-content: flex-end;
+}

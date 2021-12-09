@@ -1,95 +1,254 @@
-<table class="table user-list">
-    <thead>
-      <tr>
-        <th><span>Quantity</span></th>
-        <th><span>Minimum Quantity</span></th>
-        <th><span>Label</span></th>
-        <th><span>Products</span></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let s of listStock; let i = index">
-        <td>
-          {{ s.qte }}
-        </td>
-        <td>
-          {{ s.qteMin }}
-        </td>
-        <td>
-          {{ s.libelleStock }}
-        </td>
-        <td>
-          <a class="btn btn-info" [routerLink]="['/stocks', s.idStock]"
-            >details</a
-          >
-        </td>
-        <td>
-          <button class="btn btn-danger" (click)="deleteStock(s)">delete</button>
-        </td>
-        <td>
-          <button class="btn btn-secondary" (click)="updateStock(s)">
-            update
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  
-  <button class="btn btn-success" (click)="showForm()">Ajouter</button>
-  <button class="btn btn-danger" *ngIf="showAddStock" (click)="closeForm()">
-    Cancel
-  </button>
-  
-  <form [formGroup]="addStockForm" *ngIf="showAddStock">
-    <div class="form-group col-md-4 mb-3">
-      <label for="first" class="form-label">Quantity</label>
-      <input type="number" class="form-control" formControlName="qte" />
+
+
+<button
+  class="btn btn-success buttonAdd"
+  data-bs-toggle="modal"
+  data-bs-target="#addStock"
+>
+  Add New Stock
+  <i class="fas fa-cart-plus"></i>
+</button>
+<div class="container">
+  <div class="card" *ngFor="let s of listStock; let i = index">
+    <div class="imgBx">
+      <img class="catImage" [src]="s.img" />
     </div>
-    <div class="form-group col-md-4 mb-3">
-      <label class="form-label">Min Quantity</label>
-      <input type="number" class="form-control" formControlName="qteMin" />
+    <div class="contentBx">
+      <h2>{{ s.libelleStock }}</h2>
+      <div class="size">
+        <h3>Quantity</h3>
+
+        <span>{{ s.qte }}</span>
+      </div>
+      <div class="color">
+        <h3>Min Quantity</h3>
+        <span>{{ s.qteMin }}</span>
+      </div>
+      <div class="buttons">
+
+        <a (click)="deleteStock(s)"><i class="far fa-trash-alt"></i></a>
+        <a
+          (click)="updateStock(s)"
+          data-bs-toggle="modal"
+          data-bs-target="#updateStock"
+          ><i class="fas fa-wrench"></i>
+        </a>
+        <a
+          data-bs-toggle="modal"
+          data-bs-target="#detailes"
+          (click)="findThisOne(s)"
+          ><i class="fas fa-info"></i>
+        </a>
+      </div>
     </div>
-  
-    <div class="form-group col-md-4 mb-3">
-      <label class="form-label">Facture Status</label>
-      <input
-        class="form-control"
-        type="text"
-        placeholder="Stock Label"
-        formControlName="libelleStock"
-      />
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="addStock"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add New Stock</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="id"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addStockForm">
+          <div class="mb-3">
+            <label for="id" class="form-label">Quantity</label>
+            <input
+              type="text"
+              class="form-control"
+              id="id"
+              formControlName="qte"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="code" class="form-label">Min Quantity</label>
+            <input
+              type="text"
+              class="form-control"
+              id="code"
+              formControlName="qteMin"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="libelle" class="form-label">Label</label>
+            <input
+              type="text"
+              class="form-control"
+              id="libelle"
+              formControlName="libelleStock"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="categorieProduit" class="form-label"
+              >categorieProduit
+            </label>
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              formControlName="categorieStock"
+            >
+              <option value="Alimentaire" selected>Alimentaire</option>
+              <option value="Quicaillerie">Quicaillerie</option>
+              <option value="Electromenager">Electromenager</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Annuler
+        </button>
+        <button type="button" class="btn btn-primary" (click)="addStock()">
+          Add
+        </button>
+      </div>
     </div>
-    <button class="btn btn-success" (click)="addStock()">Add</button>
-  </form>
-  
-  <form [formGroup]="updateStockForm" *ngIf="showUpdateStock">
-    <div class="form-group col-md-4 mb-3">
-      <label for="first" class="form-label">id</label>
-      <input
-        readonly
-        type="number"
-        class="form-control"
-        formControlName="idStock"
-      />
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="updateStock"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Updating</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="id"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="updateStockForm">
+          <div class="mb-3">
+            <label for="id" class="form-label">Stock ID</label>
+            <input
+              type="text"
+              class="form-control"
+              id="id"
+              formControlName="idStock"
+              readonly
+            />
+          </div>
+          <div class="mb-3">
+            <label for="id" class="form-label">Quantity</label>
+            <input
+              type="text"
+              class="form-control"
+              id="id"
+              formControlName="qte"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="code" class="form-label">Min Quantity</label>
+            <input
+              type="text"
+              class="form-control"
+              id="code"
+              formControlName="qteMin"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="libelle" class="form-label">Label</label>
+            <input
+              type="text"
+              class="form-control"
+              id="libelle"
+              formControlName="libelleStock"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="categorieProduit" class="form-label">Categorie </label>
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              formControlName="categorieStock"
+            >
+              <option value="Alimentaire" selected>Alimentaire</option>
+              <option value="Quicaillerie">Quicaillerie</option>
+              <option value="Electromenager">Electromenager</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Annuler
+        </button>
+        <button type="button" class="btn btn-primary" (click)="update()">
+          Save
+        </button>
+      </div>
     </div>
-    <div class="form-group col-md-4 mb-3">
-      <label for="first" class="form-label">Quantity</label>
-      <input type="number" class="form-control" formControlName="qte" />
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="detailes"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">List Of Products</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <table class="table user-list table-responsive">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Prix</th>
+              <th>Catégorie</th>
+              <th>Libelle</th>
+              <th>Rayon</th>
+            </tr>
+          </thead>
+
+          <tr *ngFor="let p of listOfProducts">
+            <td>{{ p.code }}</td>
+            <td>{{ p.prixUnitaire }}</td>
+            <td>{{ p.detailProduit.categorieProduit }}</td>
+            <td>{{ p.libelle }}</td>
+            <td>{{ p.rayon.idRayon }}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Annuler
+        </button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+          Print
+        </button>
+      </div>
     </div>
-    <div class="form-group col-md-4 mb-3">
-      <label class="form-label">Min Quantity</label>
-      <input type="number" class="form-control" formControlName="qteMin" />
-    </div>
-  
-    <div class="form-group col-md-4 mb-3">
-      <label class="form-label">Facture Status</label>
-      <input
-        class="form-control"
-        type="text"
-        placeholder="Stock Label"
-        formControlName="libelleStock"
-      />
-    </div>
-    <button class="btn btn-success" (click)="update()">Update</button>
-  </form>
-  
+  </div>
+</div>

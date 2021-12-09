@@ -34,7 +34,7 @@
                     <div class="alert alert-secondary"
                         *ngIf="myForm.controls['password'].invalid && myForm.controls['password'].touched">
                         <div *ngIf="myForm.controls['password'].hasError('required')">this is a required field</div>
-                        <div *ngIf="myForm.controls['password'].hasError('minlength')">this minlength is equal to 8</div>
+                        <div *ngIf="myForm.controls['password'].hasError('minlength')">minlength 8</div>
                     </div>
 
 

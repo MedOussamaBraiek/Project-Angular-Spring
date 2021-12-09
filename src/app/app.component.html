@@ -1,22 +1,23 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>ProjetProduit</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
-</head>
-<body>
-<div class="container">
-    <app-header></app-header>
-  <div class="container" id="body">
-    <router-outlet></router-outlet>
-  </div>
-</div>
+  <head>
+    <meta charset="utf-8" />
+    <title>ProjetProduit</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <app-side-bar></app-side-bar>
+    <div class="">
+      <router-outlet></router-outlet>
+      
+    </div>
 
-<app-footer></app-footer>
-
-</body>
+  </body>
 </html>

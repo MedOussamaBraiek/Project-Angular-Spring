@@ -37,10 +37,11 @@ export class FormUserComponent implements OnInit {
 
   postUser(form: NgForm){
 
-
+    //this.cl = form.value;
+    //console.log(this.cl);
     this.cs.addClient(this.cl)
     .subscribe(res=>{
-      console.log(res);
+      //console.log(res);
       alert("Client added successfully");
       if(this.cl.categorieClient == "Premuim")
         this.router.navigateByUrl('/user/listuser/Premuim');
@@ -48,6 +49,8 @@ export class FormUserComponent implements OnInit {
         this.router.navigateByUrl('/user/listuser/Ordinaire');
       else if(this.cl.categorieClient == "Fidele")
         this.router.navigateByUrl('/user/listuser/Fidele');
+      else if(this.cl.categorieClient == "Admin")
+         this.router.navigateByUrl('/user/listuser/Admin');
     }),
     err => 
       alert("Something went wrong");

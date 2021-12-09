@@ -37,44 +37,49 @@ export class LoginUserComponent implements OnInit {
   @Output() log = new EventEmitter<Login>();
 
   ngOnInit(): void {
-
+    this.getAll()
     this.myForm = this.f.group({
       email: ['', [Validators.required, Validators.pattern('[a-zA-Z]*@gmail.com')]],
       password: ['', [Validators.required, Validators.minLength(8)]]
     })
   }
-
+getAll(){
+  this.cs.getAllClient().subscribe(res => {
+    console.log(res);
+  })
+}
 
   login(myForm: FormGroup) {
     this.cs.getAllClient().subscribe(res => {
-      this.clients = res;
+      console.log(res);
 
+      this.clients = res;
 
       this.clients.forEach(client =>
         {
           if (client.email === myForm.controls['email'].value &&
             client.password === myForm.controls['password'].value) {
-    
+
             this.text1 = "Welcome";
             this.text2 = client.prenom + " " +client.nom;
             alert('Successfully Loged In')
             this.find=true;
             this.reset();
-  
+
             this.ClientConnecte = client.idClient;
             this.router.navigate(['/shop/'+this.ClientConnecte]);
           }
-  
+
         })
           if(this.find == false) {
             alert('please give a valid account')
             this.text1 = 'please give a valid account'
           }
-  
+
 
     });
-    
-    
+
+
       }
 
 

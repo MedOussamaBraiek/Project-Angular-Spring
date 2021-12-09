@@ -1,5 +1,6 @@
 import { detailProduit } from "./detailProduit";
 import { fournisseur } from "./fournisseur";
+import { ProductImage } from "./ProductImage";
 import { rayon } from "./rayon";
 import { stock } from "./stock";
 
@@ -14,4 +15,6 @@ export class produit{
   stock : stock ;
   detailProduit ?: detailProduit ;
   fournisseurs : fournisseur[];
+  productImage: ProductImage;
+  url?:string;
 }
