@@ -9,7 +9,7 @@ import { ProductsService } from '../services/products.service';
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html',
-  styleUrls: ['./shop.component.css']
+  styleUrls: ['./shop.component.scss'],
 })
 export class ShopComponent implements OnInit {
 
@@ -64,5 +64,6 @@ export class ShopComponent implements OnInit {
     this.rout.paramMap.subscribe(res => {this.p = res.get('ClientConnecte');});
     this.router.navigate(['/facture/'+this.p]);
   }
+
 
 }

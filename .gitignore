@@ -45,3 +45,4 @@ testem.log
 Thumbs.db
 *.pack
 *.json
+.angular/cache/angular-webpack/c7a2f70df986c76d8e86cfd6af9d9277be5a1570/index.pack.old

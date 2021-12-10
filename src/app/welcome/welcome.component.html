@@ -1,5 +1,6 @@
 
 <body>
+
 	<img class="wave" src="assets/wave.png">
 	<div class="container">
 		<div id="b" class="img col-md-6">
@@ -7,8 +8,8 @@
 		</div>
 		<div id="f" class="login-content col-md-6">
 			<form action="index.html" [formGroup]="myForm" (ngSubmit)="login(myForm)" *ngIf="!hide">
+                <h2 class="title">Welcome</h2>
 				<img src="assets/welcome2.svg">
-				<h2 class="title">Welcome</h2>
            		<div class="input-div one focus">
            		   <div class="i">
            		   		<i class="fas fa-user"></i>
@@ -49,9 +50,14 @@
                 <a href="#">Forgot Password?</a>
             	<input type="submit" class="btn" value="Login">
 
-                <p>Don't have an account?</p><a (click)="show()" id="account">Register Here</a>
-            </form>
+                <p>Don't have an account?</p>
+                <a href="#" (click)="show()" id="account">Register Here</a>
+                <p>or</p>
+                <button class="buta" routerLink="/admin/product" > Admin dashboard</button>
 
+                
+            </form>
+            
             <form class ="mx-auto d-flex align-items-start flex-wrap"  #f="ngForm" *ngIf="hide">
 
                 <div class="">
